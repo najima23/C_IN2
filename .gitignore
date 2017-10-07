@@ -56,5 +56,5 @@ dkms.conf
 .DS_Store
 
 # CodeBlox
-*.layout    # this is a list of all the open files in the corresponding project, with tab and line position
-*.depend    # the dependencies of each file in a project
+*.layout
+*.depend
