@@ -41,9 +41,6 @@ int askAgain(int Pos)
 **********************************************************/
 void clearBuffer()
 {
-   char Dummy;
-   do
-   {
-      scanf("%c", &Dummy); 
-   } while (Dummy != '\n');
+   while (getchar() != '\n')
+      ;
 }
