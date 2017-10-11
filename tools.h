@@ -2,6 +2,6 @@
    #define TOOLS_H TOOLS.H
 
    void clearBuffer();
-   int  askAgain(int Pos);
+   short askYesOrNo(char *);
 
 #endif
