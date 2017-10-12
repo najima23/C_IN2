@@ -4,6 +4,7 @@
 void clearBuffer();
 int  askAgain();
 
+
 /**********************************************************
 * Funktion: aksAgain
 * Beschreibung: Wiederholung: Ja / Nein - Abfrage
