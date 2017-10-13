@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 #include <stdio.h>
 #include "escapesequenzen.h"
 
 void clearBuffer();
 int  askAgain();
-
+short askYesOrNo(char *);
 
 /**********************************************************
 * Funktion: aksAgain
@@ -22,7 +21,7 @@ int askAgain(int Pos)
       POSITION(Pos,1);
       printf("Moechten Sie noch einmal (j/n)? ");
 		scanf("%c", &x);
-		if( x != '\n' ) 
+		if( x != '\n' )
       {
          clearBuffer();
       }
@@ -40,19 +39,6 @@ int askAgain(int Pos)
 * Beschreibung: Tastaturpuffer leeren
 * Parameter:    -/-
 * Ergebnis:     -/-
-**********************************************************/
-void clearBuffer()
-{
-   while (getchar() != '\n')
-      ;
-}
-=======
-#include <stdio.h>
-
-
-/**********************************************************
- * Funktion:      clearBuffer
- * Beschreibung:  Leert den Tastaturpuffer
 **********************************************************/
 void clearBuffer()
 {
@@ -78,7 +64,7 @@ short askYesOrNo(char *string)
       if ( (input = getchar()) != '\n')                        // Einlesen eines Chars
          clearBuffer();
 
-      switch (input)                                           // ÃœberprÃ¼fung des Chars
+      switch (input)                                           // Überprüfung des Chars
       {
          case 'j':
          case 'J': return 1;
@@ -90,9 +76,3 @@ short askYesOrNo(char *string)
 
    return 0;   // Dummy, sonst gibts Compilerfehler
 }
-
-
-
-
-
->>>>>>> 7bb723f8e868aa912198419194e6634f1cdd2fdc
