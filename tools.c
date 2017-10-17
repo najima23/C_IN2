@@ -1,12 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "escapesequenzen.h"
 
 void clearBuffer();
 int  askAgain();
+void clearScreen();
 short askYesOrNo(char *);
 
 /**********************************************************
-* Funktion: aksAgain
+* Funktion:     askAgain
 * Beschreibung: Wiederholung: Ja / Nein - Abfrage
 * Parameter:    -/-
 * Ergebnis:     int - Ergebnis der Abfrage
@@ -35,7 +37,7 @@ int askAgain(int Pos)
 }
 
 /**********************************************************
-* Funktion: clearBuffer
+* Funktion:     clearBuffer
 * Beschreibung: Tastaturpuffer leeren
 * Parameter:    -/-
 * Ergebnis:     -/-
@@ -44,6 +46,17 @@ void clearBuffer()
 {
    while (getchar() != '\n')
       ;
+}
+
+/**********************************************************
+* Funktion:     clearScreen
+* Beschreibung: Leert die Konsole
+* Parameter:    -/-
+* Ergebnis:     -/-
+**********************************************************/
+void clearScreen()
+{
+   system("CLS");
 }
 
 /**********************************************************

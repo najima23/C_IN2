@@ -12,7 +12,7 @@
    {
       int Hour;
       int Minute;
-      int Secound;
+      int Second;
    } TTime;
 
 #endif
