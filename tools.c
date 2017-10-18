@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "escapesequenzen.h"
 
-void clearBuffer();
-int  askAgain();
-void clearScreen();
-short askYesOrNo(char *);
+void clearBuffer();                                         // VÖLLIG UNNÖTIG
+int  askAgain();                                            //
+void clearScreen();                                         //
+short askYesOrNo(char *);                                   //
 
 /**********************************************************
 * Funktion:     askAgain
@@ -13,7 +13,7 @@ short askYesOrNo(char *);
 * Parameter:    -/-
 * Ergebnis:     int - Ergebnis der Abfrage
 **********************************************************/
-int askAgain(int Pos)
+int askAgain(int Pos)                                       // askAgain WIRD NICHT MEHR BENÖTIGT, DA ES DURCH aksYesOrNo() ERSETZT WERDEN SOLL
 {
    char x;
    do
@@ -54,7 +54,7 @@ void clearBuffer()
 * Parameter:    -/-
 * Ergebnis:     -/-
 **********************************************************/
-void clearScreen()
+void clearScreen()                                             // WIRD SO BEI LINUX NICHT FUNKTIONIEREN
 {
    system("CLS");
 }
