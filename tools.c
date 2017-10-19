@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "escapesequenzen.h"
 
-void clearBuffer();                                         // VÖLLIG UNNÖTIG
-int  askAgain();                                            //
-void clearScreen();                                         //
-short askYesOrNo(char *);                                   //
+int  askAgain();
+void clearBuffer();
+void clearScreen();
+short askYesOrNo(char *);
+void waitForEnter();
 
 /**********************************************************
 * Funktion:     askAgain
@@ -13,7 +14,7 @@ short askYesOrNo(char *);                                   //
 * Parameter:    -/-
 * Ergebnis:     int - Ergebnis der Abfrage
 **********************************************************/
-int askAgain(int Pos)                                       // askAgain WIRD NICHT MEHR BENÖTIGT, DA ES DURCH aksYesOrNo() ERSETZT WERDEN SOLL
+int askAgain(int Pos)
 {
    char x;
    do
@@ -54,9 +55,10 @@ void clearBuffer()
 * Parameter:    -/-
 * Ergebnis:     -/-
 **********************************************************/
-void clearScreen()                                             // WIRD SO BEI LINUX NICHT FUNKTIONIEREN
+void clearScreen()
 {
-   system("CLS");
+   system("CLS");    // für Windows
+//   system("CLEAR");  // für Linux
 }
 
 /**********************************************************
@@ -90,49 +92,9 @@ short askYesOrNo(char *string)
    return 0;   // Dummy, sonst gibts Compilerfehler
 }
 
-
-
-
-
-
-
-
-
-// ***************************************************************************************************
-// ***************************************************************************************************
-// ************************* PP (Peters Programm) ****************************************************
-// ***************************************************************************************************
-// ***************************************************************************************************
-
-
-
-
-#include <stdio.h>
-#include <stdlib.h>
-
-
-/**********************************************************
- * Funktion:      clearScreen
- * Beschreibung:  Leert den Bildschirm
-**********************************************************/
-void clearScreen()
-{
-   system("clear");
-}
-
-/**********************************************************
- * Funktion:      clearBuffer
- * Beschreibung:  Leert den Tastaturpuffer
-**********************************************************/
-void clearBuffer()
-{
-   while (getchar() != '\n')
-      ;
-}
-
 /**********************************************************
  * Funktion:      waitForEnter
- * Beschreibung:  Eingabeaufforderung zur Betätigung 
+ * Beschreibung:  Eingabeaufforderung zur Betätigung
  *                der Eingabetaste (Piratentaste, arrrrr)
 **********************************************************/
 void waitForEnter()
@@ -143,38 +105,3 @@ void waitForEnter()
    if ( (c = getchar()) != '\n')
       clearBuffer();
 }
-
-/**********************************************************
- * Funktion:      askYesOrNo
- * Beschreibung:  Nachfrage, ob etwas wiederholt werden soll
- * Parameter:     Promttext in Stringform
- * Ergebnis:      1 wenn j oder J eingegeben wurde,
- *                0 wenn n oder N
-**********************************************************/
-short askYesOrNo(char *string)
-{
-   char input;
-
-   do
-   {
-      printf("%s", string);                                    // Abfrage zum Wiederholen anzeigen
-
-      if ( (input = getchar()) != '\n')                        // Einlesen eines Chars
-         clearBuffer();
-
-      switch (input)                                           // Überprüfung des Chars
-      {
-         case 'j':
-         case 'J': return 1;
-         case 'n':
-         case 'N': return 0;
-         default: input = '\0';
-      }
-   } while (!input);                                           // Solange nicht ja oder nein eingegeben wurde
-
-   return 0;   // Dummy, sonst gibts Compilerfehler
-}
-
-
-
-
