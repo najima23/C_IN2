@@ -1,14 +1,14 @@
 #ifndef DATASTRUCTURE_H_INCLUDED
    #define DATASTRUCTURE_H_INCLUDED
 
-   typedef struct
+   typedef struct       // Struktur, um ein Datum abzuspeichern
    {
       int Day;
       int Month;
       int Year;
    } TDate;
 
-   typedef struct
+   typedef struct       // Struktur, um eine Zeit abzuspeichern
    {
       int Hour;
       int Minute;
