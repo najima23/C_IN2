@@ -25,7 +25,7 @@ void clearBuffer()
 void clearScreen()
 {
 //   system("CLS");    // für Windows
-   system("CLEAR");  // für Linux
+   system("clear");  // für Linux
 }
 
 /**********************************************************
