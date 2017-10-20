@@ -168,10 +168,13 @@ short getTimeFromString(char *input, TTime *time)
       pSearch++;
    }
 
-   toValid.Hour = atoi(pHour);                        // Zeit in die Validierungs-Struktur einspeichern
+   if ( *pHour >= '0' && *pHour <= '9' )              // Überprüfen, ob eine Zahl eingegeben wurde
+      toValid.Hour = atoi(pHour);                     // Zeit in die Validierungs-Struktur einspeichern
+   else
+      return 0;
 
    if (!pMinute)                                      // Falls keine Minute und/oder Sekunde eingegeben: 0 setzen
-      toValid.Minute = 0;
+      toValid.Minute = 0;                             // Ansonsten eingegebene Daten übertragen
    else
       toValid.Minute = atoi(pMinute);
 
