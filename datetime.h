@@ -1,10 +1,10 @@
 #ifndef DATATIME_H_INCLUDED
    #define DATATIME_H_INCLUDED
 
-   short isLeapYear(int);
-   short isDateValid(TDate);
+   int isLeapYear(int);
+   int isDateValid(TDate);
    short getDateFromString(char *, TDate *);
-   short isTimeValid(TTime);
+   int isTimeValid(TTime);
    short getTimeFromString(char *, TTime *);
 
 #endif

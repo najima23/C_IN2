@@ -1,12 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "datastructure.h"
-
-int isLeapYear (int);
-int isDateValid (TDate);
-short getDateFromString (char *, TDate *);   // Direkt von Peter
-int isTimeValid (TTime);
-short getTimeFromString (char *, TTime *);       // Direkt von Peter
+#include "datetime.h"
 
 /********************************************************************
  * Funktion:      isLeapYear
