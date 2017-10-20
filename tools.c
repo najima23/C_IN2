@@ -1,41 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "escapesequenzen.h"
+#include "tools.h"
 
-int  askAgain();
-void clearBuffer();
-void clearScreen();
-short askYesOrNo(char *);
-void waitForEnter();
-
-/**********************************************************
-* Funktion:     askAgain
-* Beschreibung: Wiederholung: Ja / Nein - Abfrage
-* Parameter:    -/-
-* Ergebnis:     int - Ergebnis der Abfrage
-**********************************************************/
-int askAgain(int Pos)
-{
-   char x;
-   do
-	{
-      POSITION(Pos,1);
-      CLEAR_LINE;
-      POSITION(Pos,1);
-      printf("Moechten Sie noch einmal (j/n)? ");
-		scanf("%c", &x);
-		if( x != '\n' )
-      {
-         clearBuffer();
-      }
-      // Fehlermeldung bei Falscheingabe
-      if ( x != 'j' && x != 'J' && x != 'n' && x != 'N' )
-      {
-         printf("\n Falsche Eingabe! Bitte 'j' oder 'n' eingeben!\n");
-      }
-   } while ( x != 'j' && x != 'J' && x != 'n' && x != 'N' );
-   return (x == 'j' || x == 'J');
-}
 
 /**********************************************************
 * Funktion:     clearBuffer
@@ -57,8 +24,8 @@ void clearBuffer()
 **********************************************************/
 void clearScreen()
 {
-   system("CLS");    // für Windows
-//   system("CLEAR");  // für Linux
+//   system("CLS");    // für Windows
+   system("CLEAR");  // für Linux
 }
 
 /**********************************************************
