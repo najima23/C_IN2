@@ -98,3 +98,15 @@ void inputTime()
 
    printf("\n");
 }
+/********************************************************************
+ * Funktion
+ *   - Benutzer soll eine Uhrzeit eingeben.
+ *   - Eingabe wird mit Hilfe der Funktion getTimeFromString geparst
+ *     und geprueft. Bei gueltiger Uhrzeit steht diese in der
+ *     Uhrzeitvariable Time.
+ *   - Ergebnis der Eingabe wird entsprechend angezeigt.
+ *   - wird nur die Eingabetaste gedrueckt, wird die Funktion ohne
+ *     weitere Bildschirmausgabe beendet.
+ * Paramater: keine
+ * Funktionsergebnis: nichts
+ *******************************************************************/

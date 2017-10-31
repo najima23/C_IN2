@@ -33,12 +33,5 @@
       int TPlayer[MAXPLAYER];
    } TTeam;
 
-   typedef struct
-   {
-       char *SName;
-       int *TDate;
-       int TrikotNummer;
-       int Tore;
-   }
 
 #endif
