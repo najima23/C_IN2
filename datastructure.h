@@ -15,4 +15,12 @@
       int Second;
    } TTime;
 
+   typedef struct
+   {
+       char *SName;
+       int *TDate;
+       int TrikotNummer;
+       int Tore;
+   }
+
 #endif
