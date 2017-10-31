@@ -63,6 +63,8 @@ short askYesOrNo(char *string)
  * Funktion:      waitForEnter
  * Beschreibung:  Eingabeaufforderung zur Betätigung
  *                der Eingabetaste (Piratentaste, arrrrr)
+ * Parameter:     -/-
+ * Ergebnis:      -/-
 **********************************************************/
 void waitForEnter()
 {
@@ -71,4 +73,23 @@ void waitForEnter()
    printf("Bitte <ENTER> betaetigen");
    if ( (c = getchar()) != '\n')
       clearBuffer();
+}
+
+/**********************************************************
+ * Funktion:     printLine
+ * Beschreibung: Gibt ein Zeichen in der gewuenschten
+ *               Anzahl aus
+ * Parameter:    - 1 Zeichen
+ *               - Anzahl der Wiederholungen
+ * Ergebnis:     -/-
+
+**********************************************************/
+void printLine(char Zeichen, int Anzahl)
+{
+   int i;
+   for (i=0; i<Anzahl; i++)
+   {
+      printf("%c", Zeichen);
+   }
+   printf("\n");
 }

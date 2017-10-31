@@ -12,7 +12,7 @@
  *******************************************************************/
 int isLeapYear (int year)
 {
-   if ( year%400 == 0)              // Wenn sich das Jahr durch 400 oder 4, aber nicht durch 100 teilen lässt: Schaltjahr
+   if ( year%400 == 0)              // Wenn sich das Jahr durch 400 oder 4, aber nicht durch 100 teilen laesst: Schaltjahr
       return 1;
    else if ( year%100 == 0)
       return 0;
@@ -24,10 +24,10 @@ int isLeapYear (int year)
 
 /********************************************************************
  * Funktion:      isDateValid
- * Beschreibung:  Überprüft, ob das als Argument übergebene Datum
- *                gültig ist
+ * Beschreibung:  Ueberprueft, ob das als Argument uebergebene Datum
+ *                gueltig ist
  * Paramater:     Eine Struktur, die das Datum beinhaltet
- * Ergebnis:      1, wenn das Datum gültig ist
+ * Ergebnis:      1, wenn das Datum gueltig ist
  *                0, wenn nicht
  *******************************************************************/
 int isDateValid (TDate Date)
@@ -62,10 +62,10 @@ int isDateValid (TDate Date)
 
 /********************************************************************
  * Funktion:      isTimeValid
- * Beschreibung:  Überprüft, ob die als Argument übergebene Zeit
- *                gültig ist
+ * Beschreibung:  Überprueft, ob die als Argument uebergebene Zeit
+ *                gultig ist
  * Paramater:     Eine Struktur, die die Zeit beinhaltet
- * Ergebnis:      1, wenn die Zeit gültig ist
+ * Ergebnis:      1, wenn die Zeit gueltig ist
  *                0, wenn nicht
  *******************************************************************/
 int isTimeValid (TTime Time)
@@ -81,25 +81,25 @@ int isTimeValid (TTime Time)
 /********************************************************************
  * Funktion:      getDateFromString
  * Beschreibung:  Ein in Stringform eingegebenes Datum wird in Int
- *                umgewandelt, überprüft und wenn korrekt in eine
+ *                umgewandelt, ueberprueft und wenn korrekt in eine
  *                Struktur gespeichert.
  * Paramater:     - Der String, der das Datum enthalten soll
  *                - Zeiger auf eine Struktur, in die das Datum
  *                  gespeichert werden soll
- * Ergebnis:      1, wenn der String ein gültiges Datum enthielt
+ * Ergebnis:      1, wenn der String ein gueltiges Datum enthielt
  *                0, wenn nicht
  *******************************************************************/
 short getDateFromString(char *input, TDate *date)
 {
-   char  *pDay = input,       // Zeiger für Tageszahl
-         *pMonth = NULL,      // Zeiger für Monatszahl
-         *pYear = NULL,       // Zeiger für Jahreszahl
+   char  *pDay = input,       // Zeiger fuer Tageszahl
+         *pMonth = NULL,      // Zeiger fuer Monatszahl
+         *pYear = NULL,       // Zeiger fuer Jahreszahl
          *pSearch = input;    // Suchzeiger
 
    TDate toValid;             // Struktur zum Validieren des Datums
 
    while (*pSearch)                                   // String nach Punkten durchsuchen und Pointer
-   {                                                  // für Monat und Jahr hinter die Punkte setzen
+   {                                                  // fuer Monat und Jahr hinter die Punkte setzen
       if ( *pSearch == '.')
       {
          if (!pMonth)
@@ -107,7 +107,7 @@ short getDateFromString(char *input, TDate *date)
          else
          {
             pYear = pSearch+1;
-            break;                                    // Wenn Pointer für Jahr gesetzt: Suchschleife verlassen
+            break;                                    // Wenn Pointer fuer Jahr gesetzt: Suchschleife verlassen
          }
       }
 
@@ -115,7 +115,7 @@ short getDateFromString(char *input, TDate *date)
    }
 
    if (!pYear)                                        // Wenn die Jahreszeiger nicht gesetzt:
-      return 0;                                       // Funktion beenden, Eingabe des Datum ist ungültig
+      return 0;                                       // Funktion beenden, Eingabe des Datum ist ungueltig
 
    toValid.Day = atoi(pDay);                          // Datum in die Validierungs-Struktur einspeichern
    toValid.Month = atoi(pMonth);
@@ -135,25 +135,25 @@ short getDateFromString(char *input, TDate *date)
 /********************************************************************
  * Funktion:      getTimeFromString
  * Beschreibung:  Eine in Stringform eingegebene Zeit wird in Int
- *                umgewandelt, überprüft und wenn korrekt in eine
+ *                umgewandelt, ueberprueft und wenn korrekt in eine
  *                Struktur gespeichert.
  * Paramater:     - Der String, der die Zeit enthalten soll
  *                - Zeiger auf eine Struktur, in die die Zeit
  *                  gespeichert werden soll
- * Ergebnis:      1, wenn der String eine gültige Zeit enthielt
+ * Ergebnis:      1, wenn der String eine gueltige Zeit enthielt
  *                0, wenn nicht
  *******************************************************************/
 short getTimeFromString(char *input, TTime *time)
 {
-   char  *pHour = input,         // Zeiger für Stunden
-         *pMinute = NULL,        // Zeiger für Minuten
-         *pSecond = NULL,        // Zeiger für Sekunden
+   char  *pHour = input,         // Zeiger fuer Stunden
+         *pMinute = NULL,        // Zeiger fuer Minuten
+         *pSecond = NULL,        // Zeiger fuer Sekunden
          *pSearch = input;       // Suchzeiger
 
    TTime toValid;                // Struktur zum Validieren der Zeit
 
    while (*pSearch)                                   // String nach Doppelpunkten durchsuchen und Pointer
-   {                                                  // für Minute und Sekunde hinter die Doppelpunkte setzen
+   {                                                  // fuer Minute und Sekunde hinter die Doppelpunkte setzen
       if ( *pSearch == ':')
       {
          if (!pMinute)
@@ -161,20 +161,20 @@ short getTimeFromString(char *input, TTime *time)
          else
          {
             pSecond = pSearch+1;
-            break;                                    // Wenn Pointer für Sekunde gesetzt: Suchschleife verlassen
+            break;                                    // Wenn Pointer fuer Sekunde gesetzt: Suchschleife verlassen
          }
       }
 
       pSearch++;
    }
 
-   if ( *pHour >= '0' && *pHour <= '9' )              // Überprüfen, ob eine Zahl eingegeben wurde
+   if ( *pHour >= '0' && *pHour <= '9' )              // Überpruefen, ob eine Zahl eingegeben wurde
       toValid.Hour = atoi(pHour);                     // Zeit in die Validierungs-Struktur einspeichern
    else
       return 0;
 
    if (!pMinute)                                      // Falls keine Minute und/oder Sekunde eingegeben: 0 setzen
-      toValid.Minute = 0;                             // Ansonsten eingegebene Daten übertragen
+      toValid.Minute = 0;                             // Ansonsten eingegebene Daten uebertragen
    else
       toValid.Minute = atoi(pMinute);
 
