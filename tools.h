@@ -5,5 +5,6 @@
    void clearScreen();           // Leert den Terminal
    short askYesOrNo(char *);     // Ja/Nein Abfrage
    void waitForEnter();          // Eingabeaufforderung der Entertaste
+   void printLine(char, int);    // Gibt ein Zeichen mit der gewuenschten Anzahl aus
 
 #endif
