@@ -8,14 +8,19 @@ void inputTime();
 
 int main()
 {
+   int choice=0;
    do
    {
       clearScreen();
-      printf("Hinweis: Druecken Sie nur die Eingabetaste,\n");
+      choice = getMenu();
+      clearBuffer();
+
+/*      printf("Hinweis: Druecken Sie nur die Eingabetaste,\n");
       printf("         um die jeweilige Eingabe abzubrechen.\n\n");
 
       inputDate();
       inputTime();
+*/
    } while (askYesOrNo("Moechten Sie noch einmal (j/n) ? "));
 
    return 0;
@@ -111,19 +116,3 @@ void inputTime()
  * Funktionsergebnis: nichts
  *******************************************************************/
 
-void Menu()
-{
-   char Menu[] =
-   {
-      "Mannschaften-Verwaltung V0.2"
-      "============================"
-      "1. Neue Mannschaften anlegen"
-      "2. Spieler hinzufuegen"
-      "3. Spieler loeschen"
-      "4. Mannschaft loeschen"
-      "5. Suchen"
-      "6. Sortieren"
-      "7. Auflisten"
-      "8. Programm beenden"
-   }
-}

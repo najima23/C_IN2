@@ -10,7 +10,7 @@
  * Ergebnis:      1, wenn es sich um ein Schaltjahr handel
  *                0, wenn nicht
  *******************************************************************/
-int isLeapYear (int year)
+short isLeapYear (int year)
 {
    if ( year%400 == 0)              // Wenn sich das Jahr durch 400 oder 4, aber nicht durch 100 teilen laesst: Schaltjahr
       return 1;
@@ -30,7 +30,7 @@ int isLeapYear (int year)
  * Ergebnis:      1, wenn das Datum gueltig ist
  *                0, wenn nicht
  *******************************************************************/
-int isDateValid (TDate Date)
+short isDateValid (TDate Date)
 {
    int daysPerMonth = 0;      // Anzahl der Tage, die ein Monat hat
 
@@ -121,7 +121,7 @@ short getDateFromString(char *input, TDate *date)
  * Ergebnis:      1, wenn die Zeit gueltig ist
  *                0, wenn nicht
  *******************************************************************/
-int isTimeValid(TTime Time)
+short isTimeValid(TTime Time)
 {
    if (Time.Hour >= 0 && Time.Hour <= 23 &&
        Time.Minute >= 0 && Time.Minute <= 59 &&

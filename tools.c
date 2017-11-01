@@ -83,7 +83,8 @@ void waitForEnter()
 void printLine(char Symbol, int lineLenght)
 {
    int i;
-   
+
    for (i = 0; i < lineLenght ; i++)
       putchar(Symbol);
+      printf("\n");
 }
