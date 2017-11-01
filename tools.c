@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "escapesequenzen.h"
 #include "tools.h"
 
 
@@ -35,13 +34,13 @@ void clearScreen()
  * Ergebnis:      1 wenn j oder J eingegeben wurde,
  *                0 wenn n oder N
 **********************************************************/
-short askYesOrNo(char *string)
+short askYesOrNo(char *prompt)
 {
-   char input;
+   unsigned char input;
 
    do
    {
-      printf("%s", string);                                    // Abfrage zum Wiederholen anzeigen
+      printf("%s", prompt);                                    // Abfrage zum Wiederholen anzeigen
 
       if ( (input = getchar()) != '\n')                        // Einlesen eines Chars
          clearBuffer();
@@ -68,10 +67,8 @@ short askYesOrNo(char *string)
 **********************************************************/
 void waitForEnter()
 {
-   char c;
-
-   printf("Bitte <ENTER> betaetigen");
-   if ( (c = getchar()) != '\n')
+   puts("Bitte Eingabetaste druecken ...");
+   if (getchar() != '\n')
       clearBuffer();
 }
 
@@ -82,14 +79,11 @@ void waitForEnter()
  * Parameter:    - 1 Zeichen
  *               - Anzahl der Wiederholungen
  * Ergebnis:     -/-
-
 **********************************************************/
-void printLine(char Zeichen, int Anzahl)
+void printLine(char Symbol, int lineLenght)
 {
    int i;
-   for (i=0; i<Anzahl; i++)
-   {
-      printf("%c", Zeichen);
-   }
-   printf("\n");
+   
+   for (i = 0; i < lineLenght ; i++)
+      putchar(Symbol);
 }
