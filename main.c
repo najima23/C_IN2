@@ -110,3 +110,20 @@ void inputTime()
  * Paramater: keine
  * Funktionsergebnis: nichts
  *******************************************************************/
+
+void Menu()
+{
+   char Menu[] =
+   {
+      "Mannschaften-Verwaltung V0.2"
+      "============================"
+      "1. Neue Mannschaften anlegen"
+      "2. Spieler hinzufuegen"
+      "3. Spieler loeschen"
+      "4. Mannschaft loeschen"
+      "5. Suchen"
+      "6. Sortieren"
+      "7. Auflisten"
+      "8. Programm beenden"
+   }
+}
