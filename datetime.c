@@ -1,3 +1,15 @@
+/****************************************************************************************************
+*****************************************************************************************************
+*** MODUL:          datetime.c
+*** BESCHREIBUNG:   Stellt Funktionen für die Eingabe von Datum und Uhrzeit zur Verfügung
+*** GLOBALE FKT:    getDateFromString
+***                 getTimeFromString
+*** LOKALE FKT:     isLeapYear
+***                 isDateValid
+***                 isTimeValid
+*****************************************************************************************************
+****************************************************************************************************/
+
 #include <stdlib.h>
 #include "datastructure.h"
 #include "datetime.h"
