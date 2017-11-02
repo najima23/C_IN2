@@ -9,6 +9,8 @@
 #include "datastructure.h"
 #include "datetime.h"
 #include "tools.h"
+#include "teams.h"
+#include "menu.h"
 
 void inputDate();
 void inputTime();
@@ -43,7 +45,8 @@ int main()
       {
          printf("%s\n", Menu[i]);
       }
-      choice = getMenu();
+
+      choice = getMenu;
 
       do
       {
@@ -59,7 +62,7 @@ int main()
             case 8: return 0;
             default: choice = 0; printf("Bitte waehlen sie ein Menupunkt aus!\n");
          }
-      }while (choice > 0 && choice < 9);
+      }while (choice > 0 && choice < 8);
    } while (askYesOrNo("Moechten Sie noch einmal (j/n) ? "));
 }
 
