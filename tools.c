@@ -35,8 +35,8 @@ void clearBuffer()
 **********************************************************/
 void clearScreen()
 {
-//   system("CLS");    // für Windows
-   system("clear");  // für Linux
+   system("CLS");    // für Windows
+//   system("clear");  // für Linux
 }
 
 /**********************************************************
@@ -98,5 +98,4 @@ void printLine(char Symbol, int lineLenght)
 
    for (i = 0; i < lineLenght ; i++)
       putchar(Symbol);
-      printf("\n");
 }

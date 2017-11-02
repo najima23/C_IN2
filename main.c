@@ -15,22 +15,52 @@ void inputTime();
 
 int main()
 {
-   int choice=0;
+   int i, choice = 0;
    do
    {
       clearScreen();
+
+      char *Menutitel[1] = {"Mannschaften-Verwaltung V0.2"};
+
+      /* Hauptmenu */
+      char *Menu[10] =
+      {
+         "1. Neue Mannschaften anlegen",
+         "2. Spieler hinzufuegen",
+         "3. Spieler loeschen",
+         "4. Mannschaft loeschen",
+         "5. Suchen",
+         "6. Sortieren",
+         "7. Auflisten",
+         "8. Programm beenden",
+      };
+
+      /* Ausgabe Menu */
+      printf("%s\n", Menutitel[0]);
+      printLine('=',28);
+      printf("\n\n");
+      for(i=0; i<10; i++)
+      {
+         printf("%s\n", Menu[i]);
+      }
       choice = getMenu();
-      clearBuffer();
 
-/*      printf("Hinweis: Druecken Sie nur die Eingabetaste,\n");
-      printf("         um die jeweilige Eingabe abzubrechen.\n\n");
-
-      inputDate();
-      inputTime();
-*/
+      do
+      {
+         switch(choice)
+         {
+            case 1: createTeam(); break;
+            case 2: addPlayer(); break;
+            case 3: deletePlayer(); break;
+            case 4: deleteTeam(); break;
+            case 5: searchPlayer(); break;
+            case 6: sortTeams(); break;
+            case 7: listTeams(); break;
+            case 8: return 0;
+            default: choice = 0; printf("Bitte waehlen sie ein Menupunkt aus!\n");
+         }
+      }while (choice > 0 && choice < 9);
    } while (askYesOrNo("Moechten Sie noch einmal (j/n) ? "));
-
-   return 0;
 }
 
 /********************************************************************

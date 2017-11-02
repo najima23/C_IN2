@@ -18,7 +18,7 @@
  *******************************************************************/
 void createTeam()
 {
-   printf("createTeam");
+   printf("createTeam\n\n");
    waitForEnter();
 }
 
@@ -30,7 +30,7 @@ void createTeam()
  *******************************************************************/
 void deleteTeam()
 {
-   printf("deleteTeam");
+   printf("deleteTeam\n\n");
    waitForEnter();
 }
 
@@ -42,7 +42,7 @@ void deleteTeam()
  *******************************************************************/
 void addPlayer()
 {
-   printf("addPlayer");
+   printf("addPlayer\n\n");
    waitForEnter();
 }
 
@@ -54,7 +54,7 @@ void addPlayer()
  *******************************************************************/
 void deletePlayer()
 {
-   printf("deletePlayer");
+   printf("deletePlayer\n\n");
    waitForEnter();
 }
 
@@ -66,7 +66,7 @@ void deletePlayer()
  *******************************************************************/
 void searchPlayer()
 {
-   printf("searchPlayer");
+   printf("searchPlayer\n\n");
    waitForEnter();
 }
 
@@ -78,7 +78,7 @@ void searchPlayer()
  *******************************************************************/
 void sortTeams()
 {
-   printf("sortTeams");
+   printf("sortTeams\n\n");
    waitForEnter();
 }
 
@@ -90,6 +90,6 @@ void sortTeams()
  *******************************************************************/
 void listTeams()
 {
-   printf("listTeams");
+   printf("listTeams\n\n");
    waitForEnter();
 }
