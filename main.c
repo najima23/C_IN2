@@ -12,8 +12,8 @@
 int main()
 {
     int input;
-    char *menuTitel = "Mannschaften-Verwaltung V0.2";
-    char *menuItems[] = {"Neue Mannschaften anlegen",
+    char *menuTitel = "Mannschaften-Verwaltung V0.2";       // Menutitel deklaration
+    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu deklaration
                          "Spieler hinzufuegen",
                          "Spieler loeschen",
                          "Mannschaft loeschen",
@@ -22,7 +22,7 @@ int main()
                          "Auflisten",
                          "Programm beenden"};
 
-    while( (input = getMenu(menuTitel, menuItems, 8)) != 8)
+    while( (input = getMenu(menuTitel, menuItems, 8)) != 8)  // Menuauswahl
     {
          switch(input)
          {

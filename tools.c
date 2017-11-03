@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "tools.h"
 
+
 /**********************************************************
 * Funktion:     clearBuffer
 * Beschreibung: Tastaturpuffer leeren
@@ -35,8 +36,13 @@ void clearBuffer()
 **********************************************************/
 void clearScreen()
 {
-//   system("CLS");    // für Windows
-   system("clear");  // für Linux
+   #ifdef __unix__
+      #define clrscreen() system("clear")    // Leert die Konsole (Unix)
+   #else
+      #define clrscreen() system("CLS")      // Leert die Konsole (Windows)
+   #endif  __unix__
+
+   clrscreen();
 }
 
 /**********************************************************

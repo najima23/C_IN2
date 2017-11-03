@@ -3,5 +3,4 @@
 
    int getMenu(char *, char **, int);
 
-
 #endif

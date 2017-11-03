@@ -36,11 +36,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="datetime.h" />
-		<Unit filename="escapesequenzen.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main.h" />
 		<Unit filename="menu.c">
 			<Option compilerVar="CC" />
 		</Unit>

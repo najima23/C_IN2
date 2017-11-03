@@ -1,8 +1,6 @@
 #ifndef DATASTRUCTURE_H_INCLUDED
    #define DATASTRUCTURE_H_INCLUDED
-   
-   
-   
+
    #define MAXPLAYER 23
    #define MAXTEAMS  10
 
