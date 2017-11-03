@@ -8,17 +8,30 @@
 ****************************************************************************************************/
 
 #include <stdio.h>
-#include "tools.h"
 #include <string.h>
-#include "main.h"
+#include "tools.h"
 
-int getMenu()
+int getMenu(char *titel, char **menuItem, int numberOfItems)
 {
-   int choice = 0;
+   int input,
+       i;
 
-   /* Menu Auswahl */
-   printf("\nIhre Wahl: ");
-   scanf("%i",&choice);
-   clearBuffer();
-   return choice;
+    do
+    {
+        clearScreen();
+
+        printf("%s\n", titel);
+        printLine('=', strlen(titel));
+        printf("\n\n");
+
+        for (i = 0 ; i < numberOfItems ; i++)
+            printf("%02d. %s\n", i+1, *(menuItem+i) );
+
+        printf("\nIhre Wahl: ");
+        scanf("%d", &input);
+        clearBuffer();
+
+    } while (input < 1 || input > numberOfItems);
+
+   return input;
 }

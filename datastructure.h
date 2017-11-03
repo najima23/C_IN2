@@ -37,4 +37,7 @@
    } TTeam;
 
 
+    extern int TeamCounter;         // Definition in teams.c
+    extern TTeam Teams[];
+
 #endif

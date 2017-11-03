@@ -9,6 +9,11 @@
 
 #include <stdio.h>
 #include "teams.h"
+#include "tools.h"
+#include "datastructure.h"
+
+int TeamCounter;
+TTeam Teams[MAXTEAMS];
 
 /********************************************************************
  * Funktion:      createTeam
