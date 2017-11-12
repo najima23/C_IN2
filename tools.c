@@ -86,8 +86,7 @@ short askYesOrNo(char *prompt)
 void waitForEnter()
 {
    puts("Bitte Eingabetaste druecken ...");
-   if (getchar() != '\n')
-      clearBuffer();
+   clearBuffer();
 }
 
 /**********************************************************

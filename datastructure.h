@@ -11,13 +11,6 @@
       int Year;
    } TDate;
 
-   typedef struct       // Struktur, um eine Zeit abzuspeichern
-   {
-      int Hour;
-      int Minute;
-      int Second;
-   } TTime;
-
    typedef struct       // Struktur, um Spielerdaten abzuspeichern
    {
       char  *Name;

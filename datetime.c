@@ -3,10 +3,8 @@
 *** MODUL:          datetime.c
 *** BESCHREIBUNG:   Stellt Funktionen für die Eingabe von Datum und Uhrzeit zur Verfügung
 *** GLOBALE FKT:    getDateFromString
-***                 getTimeFromString
 *** LOKALE FKT:     isLeapYear
 ***                 isDateValid
-***                 isTimeValid
 *****************************************************************************************************
 ****************************************************************************************************/
 
@@ -123,85 +121,4 @@ short getDateFromString(char *input, TDate *date)
    }
    else
       return 0;                                       // Ansonsten die Funktion mit 0 beenden
-}
-
-/********************************************************************
- * Funktion:      isTimeValid
- * Beschreibung:  Überprueft, ob die als Argument uebergebene Zeit
- *                gultig ist
- * Paramater:     Eine Struktur, die die Zeit beinhaltet
- * Ergebnis:      1, wenn die Zeit gueltig ist
- *                0, wenn nicht
- *******************************************************************/
-short isTimeValid(TTime Time)
-{
-   if (Time.Hour >= 0 && Time.Hour <= 23 &&
-       Time.Minute >= 0 && Time.Minute <= 59 &&
-       Time.Second >= 0 && Time.Second <= 59)
-      return 1;
-   else
-      return 0;
-}
-
-/********************************************************************
- * Funktion:      getTimeFromString
- * Beschreibung:  Eine in Stringform eingegebene Zeit wird in Int
- *                umgewandelt, ueberprueft und wenn korrekt in eine
- *                Struktur gespeichert.
- * Paramater:     - Der String, der die Zeit enthalten soll
- *                - Zeiger auf eine Struktur, in die die Zeit
- *                  gespeichert werden soll
- * Ergebnis:      1, wenn der String eine gueltige Zeit enthielt
- *                0, wenn nicht
- *******************************************************************/
-short getTimeFromString(char *input, TTime *time)
-{
-   char  *pHour = input,         // Zeiger fuer Stunden
-         *pMinute = NULL,        // Zeiger fuer Minuten
-         *pSecond = NULL,        // Zeiger fuer Sekunden
-         *pSearch = input;       // Suchzeiger
-   TTime toValid;                // Struktur zum Validieren der Zeit
-
-   while (*pSearch)                                   // String nach Doppelpunkten durchsuchen und Pointer
-   {                                                  // fuer Minute und Sekunde hinter die Doppelpunkte setzen
-      if ( *pSearch == ':')
-      {
-         if (!pMinute)
-            pMinute = pSearch+1;
-         else
-         {
-            pSecond = pSearch+1;
-            break;                                    // Wenn Pointer fuer Sekunde gesetzt: Suchschleife verlassen
-         }
-      }
-
-      pSearch++;
-   }
-
-   if (  (pHour   && (*pHour < '0'   || *pHour > '9'))   ||    // Prüfen, ob die Zeiger - falls sie gesetzt wurden -
-         (pMinute && (*pMinute < '0' || *pMinute > '9')) ||    // tatsächlich auf eine Zahl zeigen
-         (pSecond && (*pSecond < '0' || *pSecond > '9')) )
-      return 0;
-
-   toValid.Hour = atoi(pHour);                        // Zeit in die Validierungs-Struktur einspeichern
-                                                      // Falls keine Minute und/oder Sekunde eingegeben: 0 setzen
-   if (!pMinute)
-      toValid.Minute = 0;
-   else
-      toValid.Minute = atoi(pMinute);
-
-   if (!pSecond)
-      toValid.Second = 0;
-   else
-      toValid.Second = atoi(pSecond);
-
-   if (isTimeValid(toValid))                          // Wenn Die eingegebene Zeit korrekt ist,
-   {                                                  // Validierungs-Struktur in Zeitstruktur kopieren
-      time->Hour = toValid.Hour;                      // und die Funktion mit 1 beenden
-      time->Minute = toValid.Minute;
-      time->Second = toValid.Second;
-      return 1;
-   }
-
-   return 0;                                          // Ansonsten die Funktion mit 0 beenden
 }
