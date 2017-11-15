@@ -21,24 +21,26 @@ TTeam Teams[MAXTEAMS];
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createTeam(struct TTeam *Name, struct TTeam *Coach, TTeam *Size)
+void createTeam(struct TTeam *Name, struct TTeam *Coach, TTeam *Size)      // ARGUMENTE ERGEBEN GAR KEINEN SINN. ES SOLLTE NUR EIN ZEIGER AUF DIE STRUKTUR ÜBERGEBEN WERDEN. WENN ÜBERHAUPT
 {
-   char title[] = "Erfassung einer neuen Mannschaft";
+   char title[] = "Erfassung einer neuen Mannschaft";    // WIESO ARRAY-SCHREIBWEISE?
    clearScreen();
 
    printf("%s\n", title);
    printLine('=', strlen(title));
    printf("\n\n");
 
+
+   // GEDANKLICH ERSTMAL RICHTIG, ABER NOCH VIELE FEHLER
    printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
-   scanf("%s", &Name);
+   scanf("%s", &Name);        // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
    clearBuffer();
 
    printf("Geben Sie bitte den Namen des Trainers ein:\n-> ");
-   scanf("%s", &Coach);
+   scanf("%s", &Coach);       // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
    clearBuffer;
 
-   Size = 0;
+   Size = 0;                  // FALSCHER ZUGRIFF
    createPlayer();
 }
 
@@ -60,7 +62,7 @@ void deleteTeam()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Goals, TTeam *Size)
+void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Goals, TTeam *Size) // ARGUMENTE ERGEBEN GAR KEINEN SINN. ES SOLLTE NUR EIN ZEIGER AUF DIE STRUKTUR ÜBERGEBEN WERDEN.
 {
    char title[] = "Erfassung der Spieler";
 
@@ -69,7 +71,8 @@ void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Go
 
    do
    {
-      printf("\n");
+      // AUCH HIER SOLL ALLES ÜBER SEPERATE FUNKTIONEN ZUR EINGABE ABLAUFEN. AN SICH IST DER ABLAUF ABER RICHTIG, SOLANGE NICHT KOMMENTIERT
+      printf("\n");  // WOZU DAS?
       printf("Geben Sie bitte den Namen des Spielers ein:\n-> ");
       scanf("%s", &Name);
       clearBuffer();
@@ -79,16 +82,16 @@ void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Go
       clearBuffer;
 
       printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
-      scanf("%s", &Number);
+      scanf("%s", &Number);   // EINE NUMMER IN STRINGFORM?
       clearBuffer();
 
       printf("\n");
-      Goals = 0;
-      Size++;
+      Goals = 0;     // UNNÖTIG, IST SCHON 0
+      Size++;     // DEN ZEIGER WEITERSCHIEBEN? AUßERDEM GEHÖRT DAS NICHT IN DIESE FUNKTION
 
-   } while(askYesOrNo("Moechten Sie einen weiteren Spieler eingeben (j/n)?"));
+   } while(askYesOrNo("Moechten Sie einen weiteren Spieler eingeben (j/n)?"));      // DIE FUNKTION SOLL NUR EINEN SPIELER ERSTELEN, MEHR NICHT. DIE SCHLEIFE MUSS WOANDERS HIN
    printf("\n");
-   waitForEnter();
+   waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
 }
 
 
@@ -98,30 +101,10 @@ void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Go
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
+void addPlayer()
 {
-/*  do
-   {
-      do
-      {
-         printf("\nBitte geben Sie einen Spielernamen ein: ");
-         scanf("%c", &TPlayer --> Name);
-         clearBuffer;
-      }while(!TPlayer-->Name)
-
-      printf("\nBitte geben Sie das Geburtsdatum des Spielers ein: ");
-      scanf("%i", &TPlayer --> Birthday);
-      clearBuffer;
-
-      do
-      {
-         printf("\nBitte geben Sie die Trikotnummer des Spielers ein: ");
-         scanf("%i", &TPlayer --> Number);
-         clearBuffer;
-      }while(!TPlayer-->Number)
-   }while(waitForEnter())*/
-
    printf("addPlayer\n\n");
+   waitForEnter();
 }
 
 /********************************************************************
@@ -166,7 +149,7 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(struct TPlayer *ptr)
+void listOnePlayer(struct TPlayer *ptr)  // strukt UNNÖTIG, DARUM HABEN WIR JA TPEDEF GEMACHT, *ptr ALS NAME UNGEEIGNET
 {
 
    printf("listOnePlayer\n\n");
@@ -182,7 +165,7 @@ void listOnePlayer(struct TPlayer *ptr)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeams()
+void listOneTeam()
 {
    printf("listOneTeam\n\n");
 
