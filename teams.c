@@ -21,9 +21,20 @@ TTeam Teams[MAXTEAMS];
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createTeam()
+void createTeam(struct TTeam *Name, struct TTeam *Coach)
 {
    printf("createTeam\n\n");
+
+   printf("\nBitte geben Sie einen Teamnamen ein: ");
+   scanf("%c", &TTeam --> Name);
+   clearBuffer;
+
+   printf("\nBitte geben Sie den Trainernamen ein: ");
+   scanf("%c", &TTeam --> Coach);
+   clearBuffer;
+
+
+
    waitForEnter();
 }
 
@@ -45,10 +56,30 @@ void deleteTeam()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void addPlayer()
+void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
 {
    printf("addPlayer\n\n");
-   waitForEnter();
+
+   do
+   {
+      do
+      {
+         printf("\nBitte geben Sie einen Spielernamen ein: ");
+         scanf("%c", &TPlayer --> Name);
+         clearBuffer;
+      }while(!TPlayer-->Name)
+
+      printf("\nBitte geben Sie das Geburtsdatum des Spielers ein: ");
+      scanf("%i", &TPlayer --> Birthday);
+      clearBuffer;
+
+      do
+      {
+         printf("\nBitte geben Sie die Trikotnummer des Spielers ein: ");
+         scanf("%i", &TPlayer --> Number);
+         clearBuffer;
+      }while(!TPlayer-->Number)
+   }while(waitForEnter())
 }
 
 /********************************************************************
