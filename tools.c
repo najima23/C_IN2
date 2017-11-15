@@ -115,13 +115,7 @@ void printLine(char Symbol, int lineLenght)
  *                 gespeichert werden soll
  * Ergebnis:     - 1/0 Funktioniert/Funktioniert nicht
 **********************************************************/
-/*short getText(char text, int MAX, int noInput, char *saveText)
-{
-   char *temp = text;
-
-}*/
-
-int getText (char *Prompt, int MaxLen, char **Text, int AllowEmpty)
+short getText(char *Prompt, int MaxLen, int AllowEmpty, char **Text)
 {
     char *Input;
     char Format[20];

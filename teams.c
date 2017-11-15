@@ -32,12 +32,12 @@ void createTeam(TTeam *Team)
 
    printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
    getText("ABC", 50, 0, &(Team->Name));
-   scanf("%s", &(Team->Name));        // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
-   clearBuffer();
+//   scanf("%s", &(Team->Name));        // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
+//   clearBuffer();
 
    printf("Geben Sie bitte den Namen des Trainers ein:\n-> ");
-   scanf("%s", &(Team->Coach));       // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
-   clearBuffer;
+//   scanf("%s", &(Team->Coach));       // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
+//   clearBuffer;
 
    Team->Size = 0;
    createPlayer();

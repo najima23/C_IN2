@@ -6,6 +6,6 @@
    short askYesOrNo(char *);     // Ja/Nein Abfrage
    void waitForEnter();          // Eingabeaufforderung der Entertaste
    void printLine(char, int);    // Gibt ein Zeichen mit der gewuenschten Anzahl aus
-   short getText(char, int, int, char *);
+   short getText(char *, int, int, char **);
 
 #endif
