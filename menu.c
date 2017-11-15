@@ -20,20 +20,18 @@ int getMenu(char *titel, char **menuItem, int numberOfItems)
    {
       clearScreen();
 
-      /* Ausgabe Menutitel */
       printf("%s\n", titel);
-      printLine('=', strlen(titel));
+      printLine('=', strlen(titel));                     // Ausgabe Menütitel
       printf("\n\n");
 
-      /* Ausgabe Untermenu */
-      for (i = 0 ; i < numberOfItems ; i++)
+      for (i = 0 ; i < numberOfItems ; i++)              // Ausgabe Untermenüs
          printf("%02d. %s\n", i+1, *(menuItem+i) );
 
-      /* Usereingabe */
-      printf("\nIhre Wahl: ");
+      printf("\nIhre Wahl: ");                           // Auswahl des Untermenüs
       scanf("%d", &input);
       clearBuffer();
-   } while (input < 1 || input > numberOfItems);
+      
+   } while (input < 1 || input > numberOfItems);         // Solange keine gültige Eingabe getätigt
 
    return input;
 }
