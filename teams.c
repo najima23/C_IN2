@@ -21,21 +21,25 @@ TTeam Teams[MAXTEAMS];
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createTeam(struct TTeam *Name, struct TTeam *Coach)
+void createTeam(struct TTeam *Name, struct TTeam *Coach, TTeam *Size)
 {
-   printf("createTeam\n\n");
+   char title[] = "Erfassung einer neuen Mannschaft";
+   clearScreen();
 
-   printf("\nBitte geben Sie einen Teamnamen ein: ");
-   scanf("%c", &TTeam --> Name);
+   printf("%s\n", title);
+   printLine('=', strlen(title));
+   printf("\n\n");
+
+   printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
+   scanf("%s", &Name);
+   clearBuffer();
+
+   printf("Geben Sie bitte den Namen des Trainers ein:\n-> ");
+   scanf("%s", &Coach);
    clearBuffer;
 
-   printf("\nBitte geben Sie den Trainernamen ein: ");
-   scanf("%c", &TTeam --> Coach);
-   clearBuffer;
-
-
-
-   waitForEnter();
+   Size = 0;
+   createPlayer();
 }
 
 /********************************************************************
@@ -51,16 +55,52 @@ void deleteTeam()
 }
 
 /********************************************************************
+ * Funktion:      createPlayer
+ * Beschreibung:  Eingabe eines Spielers
+ * Paramater:     -/-
+ * Ergebnis:      -/-
+ *******************************************************************/
+void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Goals, TTeam *Size)
+{
+   char title[] = "Erfassung der Spieler";
+
+   printf("\n%s\n", title);
+   printLine('-', strlen(title));
+
+   do
+   {
+      printf("\n");
+      printf("Geben Sie bitte den Namen des Spielers ein:\n-> ");
+      scanf("%s", &Name);
+      clearBuffer();
+
+      printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
+      scanf("%s", &Birthday);
+      clearBuffer;
+
+      printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
+      scanf("%s", &Number);
+      clearBuffer();
+
+      printf("\n");
+      Goals = 0;
+      Size++;
+
+   } while(askYesOrNo("Moechten Sie einen weiteren Spieler eingeben (j/n)?"));
+   printf("\n");
+   waitForEnter();
+}
+
+
+/********************************************************************
  * Funktion:      addPlayer
- * Beschreibung:  Hinzufuegen eines Spielers
+ * Beschreibung:  Hinzufuegen von Spielern
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
 void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
 {
-   printf("addPlayer\n\n");
-
-   do
+/*  do
    {
       do
       {
@@ -79,7 +119,7 @@ void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
          scanf("%i", &TPlayer --> Number);
          clearBuffer;
       }while(!TPlayer-->Number)
-   }while(waitForEnter())
+   }while(waitForEnter())*/
 }
 
 /********************************************************************

@@ -15,16 +15,16 @@
    {
       char  *Name;
       TDate *Birthday;
-      int    Number;
-      int    Goals;
+      int    *Number;
+      int    *Goals;
    } TPlayer;
 
    typedef struct       // Struktur, um Teamdaten abzuspeichern
    {
       char     *Name;
       char     *Coach;
-      int       Size;
-      TPlayer   Player[MAXPLAYER];
+      int      *Size;
+      TPlayer  Player[MAXPLAYER];
    } TTeam;
 
 

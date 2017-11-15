@@ -3,7 +3,8 @@
 
    void createTeam();      // Erstellt ein Team
    void deleteTeam();      // Loescht ein Team
-   void addPlayer();       // Hinzufuegen eines Spielers
+   void createPlayer();    // Hinzufügen eines Spielers
+   void addPlayer();       // Hinzufuegen der Spieler
    void deletePlayer();    // Loeschen eines Spielers
    void searchPlayer();    // Suchen eines Spieler
    void sortTeams();       // Sortiert die Teams
