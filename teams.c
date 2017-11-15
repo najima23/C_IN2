@@ -23,6 +23,7 @@ TTeam Teams[MAXTEAMS];
  *******************************************************************/
 void createTeam(struct TTeam *Name, struct TTeam *Coach, TTeam *Size)
 {
+<<<<<<< HEAD
    char title[] = "Erfassung einer neuen Mannschaft";
    clearScreen();
 
@@ -33,6 +34,10 @@ void createTeam(struct TTeam *Name, struct TTeam *Coach, TTeam *Size)
    printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
    scanf("%s", &Name);
    clearBuffer();
+=======
+   printf("createTeam\n\n");
+
+>>>>>>> c95526a0277fdb0193f55df8e9eb25943c447922
 
    printf("Geben Sie bitte den Namen des Trainers ein:\n-> ");
    scanf("%s", &Coach);
@@ -100,6 +105,7 @@ void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Go
  *******************************************************************/
 void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
 {
+<<<<<<< HEAD
 /*  do
    {
       do
@@ -120,6 +126,11 @@ void addPlayer(struct TPlayer *Name, struct TPlayer *Birthday)
          clearBuffer;
       }while(!TPlayer-->Number)
    }while(waitForEnter())*/
+=======
+   printf("addPlayer\n\n");
+
+
+>>>>>>> c95526a0277fdb0193f55df8e9eb25943c447922
 }
 
 /********************************************************************
@@ -159,6 +170,38 @@ void sortTeams()
 }
 
 /********************************************************************
+ * Funktion:      listOnePlayer
+ * Beschreibung:  Listet einen Spieler auf
+ * Paramater:     -/-
+ * Ergebnis:      -/-
+ *******************************************************************/
+void listOnePlayer(struct TPlayer *ptr)
+{
+
+   printf("listOnePlayer\n\n");
+
+   //printf("%s (%d ; * %i)\n",(*ptr).Name, (*ptr).Number, (*ptr).Birthday);
+
+   waitForEnter();
+}
+
+/********************************************************************
+ * Funktion:      listOneTeam
+ * Beschreibung:  Listet ein Team auf
+ * Paramater:     -/-
+ * Ergebnis:      -/-
+ *******************************************************************/
+void listOneTeams()
+{
+   printf("listOneTeam\n\n");
+
+
+
+   waitForEnter();
+}
+
+
+/********************************************************************
  * Funktion:      listTeams
  * Beschreibung:  Listet die Teams auf
  * Paramater:     -/-
@@ -167,5 +210,7 @@ void sortTeams()
 void listTeams()
 {
    printf("listTeams\n\n");
+
+
    waitForEnter();
 }
