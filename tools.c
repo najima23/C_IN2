@@ -104,3 +104,71 @@ void printLine(char Symbol, int lineLenght)
    for (i = 0; i < lineLenght ; i++)
       putchar(Symbol);
 }
+
+/**********************************************************
+ * Funktion:     getText
+ * Beschreibung: XXXXXXXXXX
+ * Parameter:    - Text der Eingelesen werden soll
+ *               - maximale Anzahl an Zeichen
+ *               - 0/1 leere eingabe nicht zulässig/zulässig
+ *               - Zeiger auf Text, der in der Datenstruktur
+ *                 gespeichert werden soll
+ * Ergebnis:     - 1/0 Funktioniert/Funktioniert nicht
+**********************************************************/
+/*short getText(char text, int MAX, int noInput, char *saveText)
+{
+   char *temp = text;
+
+}*/
+
+int getText (char *Prompt, int MaxLen, char **Text, int AllowEmpty)
+{
+    char *Input;
+    char Format[20];
+    int scanErg;
+    int Len;                                                    // Länge
+    if (MaxLen <=0)
+        return 0;
+    if (Text == NULL)
+        return 0;
+    *Text = NULL;
+    Input = calloc(MaxLen +1, sizeof(char));                    // Speicher reservieren // im ersten Zeichen wird ein \0 gespeichert
+    if (Input)                                                  // Prüfen, ob Speicher reserviert worden istt
+    {
+        sprintf(Format, "%%%i[^\n]", MaxLen);                   // Kapitel 5
+        do
+        {
+            printf("%s", Prompt);
+            scanErg = scanf(Format, Input);
+            clearBuffer();
+            Len = strlen (Input);                               // Wie lang ist die eingabe
+            if (Len >0)
+            {
+                *Text = malloc((Len +1) * sizeof(char));        //
+                if (Text)
+                {
+                    strcpy(*Text, Input);
+                }
+                else
+                {
+                    free(Input);
+                    return 0;
+                }
+            }
+            else
+            {
+                if(AllowEmpty)
+                {
+                    free(Input);
+                    return 1;
+                }
+                else
+                {
+                    scanErg=0;
+                }
+            }
+        } while(scanErg == 0);
+        free(Input);
+        return 1;
+    }
+}
