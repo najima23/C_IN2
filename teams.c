@@ -77,11 +77,11 @@ void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Go
    clearBuffer();
 
    printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
-   scanf("%s", &Birthday);
+   scanf("%i", &Birthday);
    clearBuffer;
 
    printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
-   scanf("%s", &Number);   // EINE NUMMER IN STRINGFORM?
+   scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
    clearBuffer();
 
    printf("\n");
@@ -147,7 +147,7 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(struct TPlayer *ptr)  // strukt UNNÖTIG, DARUM HABEN WIR JA TPEDEF GEMACHT, *ptr ALS NAME UNGEEIGNET
+void listOnePlayer(TPlayer *)  // strukt UNNÖTIG, DARUM HABEN WIR JA TPEDEF GEMACHT, *ptr ALS NAME UNGEEIGNET
 {
 
    printf("listOnePlayer\n\n");
