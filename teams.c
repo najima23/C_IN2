@@ -137,12 +137,12 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *NAME)  // @Franz: da fehlt ein Name =
+void listOnePlayer(TPlayer *OnePlayer)  // @Franz: da fehlt ein Name =
 {
 
    printf("listOnePlayer\n\n");
 
-   //printf("%s (%d ; * %i)\n",(*ptr).Name, (*ptr).Number, (*ptr).Birthday);
+   printf("%s (%d ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
 
    waitForEnter();
 }
