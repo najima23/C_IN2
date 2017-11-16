@@ -36,7 +36,11 @@ void createTeam(TTeam *Team)
    getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 0, &(Team->Coach));
 
    Team->Size = 0;
-   createPlayer(&Player);
+
+   do
+   {
+      createPlayer(&Player);
+   } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
 }
 
 /********************************************************************
@@ -65,21 +69,9 @@ void createPlayer(TPlayer *Player)
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-   clearBuffer();
-
-/*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
-   scanf("%i", &Birthday);
-   clearBuffer;
-
-   printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
-   scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
-   clearBuffer();*/
-
-   printf("\n");
-//   Goals = 0;     // UNNÖTIG, IST SCHON 0
-
-   printf("\n");
-   waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
+   getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   Player->Goals = 0;
 }
 
 
@@ -137,7 +129,7 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *OnePlayer)  // @Franz: da fehlt ein Name =
+void listOnePlayer(TPlayer *OnePlayer)
 {
 
    printf("listOnePlayer\n\n");
