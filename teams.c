@@ -1,7 +1,7 @@
 /****************************************************************************************************
 *****************************************************************************************************
 *** MODUL:          teams.c
-*** BESCHREIBUNG:   Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
+*** BESCHREIBUNG:   Stellt die Funktionen fÃ¼r die Verwaltung der Teams zur VerfÃ¼gung
 *** GLOBALE FKT:
 *** LOKALE FKT:
 ****************************************************************************************************
@@ -76,7 +76,7 @@ void createPlayer(TPlayer *Player)
    clearBuffer();*/
 
    printf("\n");
-//   Goals = 0;     // UNNÖTIG, IST SCHON 0
+//   Goals = 0;     // UNNÃ–TIG, IST SCHON 0
 
    printf("\n");
    waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
@@ -137,14 +137,9 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *OnePlayer)  // @Franz: da fehlt ein Name =
+void listOnePlayer(TPlayer *OnePlayer)
 {
-
-   printf("listOnePlayer\n\n");
-
-   printf("%s (%d ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
-
-   waitForEnter();
+   printf("%s (%i ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
 }
 
 /********************************************************************
@@ -153,13 +148,16 @@ void listOnePlayer(TPlayer *OnePlayer)  // @Franz: da fehlt ein Name =
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeam()
+void listOneTeam(TTeam *OneTeam)
 {
-   printf("listOneTeam\n\n");
+   int i = 0;
 
+   while(i <= &(OneTeam->Size))
+   {
+      listOnePlayer();
+      i++;
+   }
 
-
-   waitForEnter();
 }
 
 
@@ -171,8 +169,11 @@ void listOneTeam()
  *******************************************************************/
 void listTeams()
 {
-   printf("listTeams\n\n");
+   int i = 0;
 
-
-   waitForEnter();
+   while(i <= &(OneTeam->Size))
+   {
+      listOneTeam();
+      i++;
+   }
 }
