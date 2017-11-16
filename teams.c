@@ -31,7 +31,7 @@ void createTeam(TTeam *Team)
    printf("\n\n");
 
    printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
-   getText("ABC", 50, 0, &(Team->Name));
+   getText("Geburt", 50, 0, &(Team->Name));
 //   scanf("%s", &(Team->Name));        // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
 //   clearBuffer();
 
