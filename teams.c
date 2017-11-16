@@ -1,7 +1,7 @@
 /****************************************************************************************************
 *****************************************************************************************************
 *** MODUL:          teams.c
-*** BESCHREIBUNG:   Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
+*** BESCHREIBUNG:   Stellt die Funktionen fÃ¼r die Verwaltung der Teams zur VerfÃ¼gung
 *** GLOBALE FKT:
 *** LOKALE FKT:
 ****************************************************************************************************
@@ -69,9 +69,27 @@ void createPlayer(TPlayer *Player)
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
+<<<<<<< HEAD
    getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
+=======
+   clearBuffer();
+
+/*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
+   scanf("%i", &Birthday);
+   clearBuffer;
+
+   printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
+   scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
+   clearBuffer();*/
+
+   printf("\n");
+//   Goals = 0;     // UNNÃ–TIG, IST SCHON 0
+
+   printf("\n");
+   waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
+>>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
 }
 
 
@@ -131,12 +149,7 @@ void sortTeams()
  *******************************************************************/
 void listOnePlayer(TPlayer *OnePlayer)
 {
-
-   printf("listOnePlayer\n\n");
-
-   printf("%s (%d ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
-
-   waitForEnter();
+   printf("%s (%i ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
 }
 
 /********************************************************************
@@ -145,13 +158,16 @@ void listOnePlayer(TPlayer *OnePlayer)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeam()
+void listOneTeam(TTeam *OneTeam)
 {
-   printf("listOneTeam\n\n");
+   int i = 0;
 
+   while(i <= &(OneTeam->Size))
+   {
+      listOnePlayer();
+      i++;
+   }
 
-
-   waitForEnter();
 }
 
 
@@ -163,8 +179,11 @@ void listOneTeam()
  *******************************************************************/
 void listTeams()
 {
-   printf("listTeams\n\n");
+   int i = 0;
 
-
-   waitForEnter();
+   while(i <= &(OneTeam->Size))
+   {
+      listOneTeam();
+      i++;
+   }
 }
