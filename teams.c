@@ -8,6 +8,7 @@
 ***************************************************************************************************/
 
 #include <stdio.h>
+#include <string.h>
 #include "teams.h"
 #include "tools.h"
 #include "datastructure.h"
@@ -24,23 +25,18 @@ TTeam Teams[MAXTEAMS];
 void createTeam(TTeam *Team)
 {
    char *title = "Erfassung einer neuen Mannschaft";
+   char *Player;
    clearScreen();
 
    printf("%s\n", title);
    printLine('=', strlen(title));
    printf("\n\n");
 
-   printf("Geben Sie bitte den Namen der Mannschaften ein:\n-> ");
-   getText("Geburt", 50, 0, &(Team->Name));
-//   scanf("%s", &(Team->Name));        // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
-//   clearBuffer();
-
-   printf("Geben Sie bitte den Namen des Trainers ein:\n-> ");
-//   scanf("%s", &(Team->Coach));       // DIE EINGABE SOLL ÜBER DIE FUNKTION getText() ERFOLGEN
-//   clearBuffer;
+   getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name));
+   getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 0, &(Team->Coach));
 
    Team->Size = 0;
-   createPlayer();
+   createPlayer(&Player);
 }
 
 /********************************************************************
@@ -61,32 +57,26 @@ void deleteTeam()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createPlayer(TPlayer *Name, TPlayer *Birthday, TPlayer *Number, TPlayer *Goals, TTeam *Size) // ARGUMENTE ERGEBEN GAR KEINEN SINN. ES SOLLTE NUR EIN ZEIGER AUF DIE STRUKTUR ÜBERGEBEN WERDEN.
+void createPlayer(TPlayer *Player)
 {
    /* Ausgabe Titel */
    char title[] = "Erfassung der Spieler";
-
    printf("\n%s\n", title);
    printLine('-', strlen(title));
 
-
-   // AUCH HIER SOLL ALLES ÜBER SEPERATE FUNKTIONEN ZUR EINGABE ABLAUFEN. AN SICH IST DER ABLAUF ABER RICHTIG, SOLANGE NICHT KOMMENTIERT
-   printf("\n");  // WOZU DAS?
-   printf("Geben Sie bitte den Namen des Spielers ein:\n-> ");
-   scanf("%s", &Name);
+   getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
    clearBuffer();
 
-   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
+/*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
    scanf("%i", &Birthday);
    clearBuffer;
 
    printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
    scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
-   clearBuffer();
+   clearBuffer();*/
 
    printf("\n");
-   Goals = 0;     // UNNÖTIG, IST SCHON 0
-   Size++;     // DEN ZEIGER WEITERSCHIEBEN? AUßERDEM GEHÖRT DAS NICHT IN DIESE FUNKTION
+//   Goals = 0;     // UNNÖTIG, IST SCHON 0
 
    printf("\n");
    waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
@@ -147,7 +137,7 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *)  // strukt UNNÖTIG, DARUM HABEN WIR JA TPEDEF GEMACHT, *ptr ALS NAME UNGEEIGNET
+void listOnePlayer(TPlayer *NAME)  // @Franz: da fehlt ein Name =
 {
 
    printf("listOnePlayer\n\n");
