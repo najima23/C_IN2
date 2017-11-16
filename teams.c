@@ -36,7 +36,7 @@ void createTeam(TTeam *Team)
    getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 0, &(Team->Coach));
 
    Team->Size = 0;
-
+   TeamCounter++;
    do
    {
       createPlayer(&Player);
@@ -61,7 +61,7 @@ void deleteTeam()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createPlayer(TPlayer *Player)
+void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Pointer nehmen wie bei createTeam?
 {
    /* Ausgabe Titel */
    char title[] = "Erfassung der Spieler";
@@ -69,11 +69,12 @@ void createPlayer(TPlayer *Player)
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-<<<<<<< HEAD
+//<<<<<<< HEAD
    getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
-=======
+   Team->Size++;
+//=======
    clearBuffer();
 
 /*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
@@ -89,7 +90,7 @@ void createPlayer(TPlayer *Player)
 
    printf("\n");
    waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
->>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
+//>>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
 }
 
 
@@ -147,7 +148,7 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *OnePlayer)
+void listOnePlayer(TPlayer *OnePlayer, TTeam *OneTeam)
 {
    printf("%s (%i ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
 }
@@ -158,7 +159,7 @@ void listOnePlayer(TPlayer *OnePlayer)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeam(TTeam *OneTeam)
+void listOneTeam(TTeam *OneTeam, TPlayer *OnePlayer)
 {
    int i = 0;
 
@@ -181,7 +182,7 @@ void listTeams()
 {
    int i = 0;
 
-   while(i <= &(OneTeam->Size))
+   while(i <= TeamCounter)
    {
       listOneTeam();
       i++;
