@@ -69,6 +69,7 @@ void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Poi
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
+<<<<<<< HEAD
 //<<<<<<< HEAD
    getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
@@ -91,6 +92,12 @@ void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Poi
    printf("\n");
    waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
 //>>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
+=======
+
+   getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   Player->Goals = 0;
+>>>>>>> ac10fad1336bd77373d63596e2de8e2992aabf64
 }
 
 
