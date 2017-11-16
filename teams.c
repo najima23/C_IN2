@@ -69,27 +69,10 @@ void createPlayer(TPlayer *Player)
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-<<<<<<< HEAD
+
    getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
-=======
-   clearBuffer();
-
-/*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
-   scanf("%i", &Birthday);
-   clearBuffer;
-
-   printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
-   scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
-   clearBuffer();*/
-
-   printf("\n");
-//   Goals = 0;     // UNNÖTIG, IST SCHON 0
-
-   printf("\n");
-   waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
->>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
 }
 
 
