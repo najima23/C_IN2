@@ -155,9 +155,9 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *OnePlayer, TTeam *OneTeam)
+void listOnePlayer(TPlayer *Player, TTeam *Team)
 {
-   printf("%s (%i ; * %i)\n", &(OnePlayer->Name), &(OnePlayer->Number), &(OnePlayer->Birthday));
+   printf("%s (%i ; * %i)\n", &(Player->Name), &(Player->Number), &(Player->Birthday));
 }
 
 /********************************************************************
@@ -166,13 +166,13 @@ void listOnePlayer(TPlayer *OnePlayer, TTeam *OneTeam)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeam(TTeam *OneTeam, TPlayer *OnePlayer)
+void listOneTeam(TTeam *Team, TPlayer *Player)
 {
    int i = 0;
 
-   while(i <= &(OneTeam->Size))
+   while(i <= &(Team->Size))
    {
-      listOnePlayer();
+      listOnePlayer(OneTeam->Player);
       i++;
    }
 
