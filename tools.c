@@ -176,7 +176,7 @@ short getText(char *Prompt, int MaxLen, int AllowEmpty, char **Text)
  *                 gespeichert werden soll
  *               - Gueltiger Zahlenbereich VON
  *               - Gueltiger Zahlenbereich BIS
- * Ergebnis:     - 1/0 Funktioniert/Funktioniert nicht
+ * Ergebnis:     -/-
 **********************************************************/
 void getNumber(char *Prompt, int **Number, int From, int To)
 {

@@ -151,10 +151,12 @@ void getDate(char *Prompt, TDate **Datum)
       if (*Input)
          if (getDateFromString(Input, &Date))
          {
-            *Datum = calloc(1, sizeof(TDate))
-//            if(*Datum)
+            *Datum = calloc(1, sizeof(TDate));
+            if(*Datum)
             {
-               Player->Birthda
+               (*Datum)->Day = Date.Day;
+               (*Datum)->Month = Date.Month;
+               (*Datum)->Year = Date.Year;
             }
             ok = 1;
          }
@@ -163,6 +165,15 @@ void getDate(char *Prompt, TDate **Datum)
       else
          break;
    } while (!ok);
+}
 
-   printf("\n");
+/********************************************************************
+ * Funktion:      printDate
+ * Beschreibung:
+ * Paramater:     Zeiger auf Datum mit Typ TDate
+ * Ergebnis:      -/-
+ *******************************************************************/
+void printDate(TDate **Date)
+{
+   printf("; * %02i.%02i.%04i)", (*Date)->Day, (*Date)->Month, (*Date)->Year);
 }

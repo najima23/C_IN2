@@ -34,14 +34,20 @@ void createTeam()
    printf("\n\n");
 
    getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name)); //
-   getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 0, &(Team->Coach));
+   getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 1, &(Team->Coach));
 
    Team->Size = 0;
+
+   /* Erfassung eines Spielers in einer neuen Manschaft */
+   title = "Erfassung der Spieler";
+   printf("\n%s\n", title);
+   printLine('-', strlen(title));
 
    do
    {
       createPlayer(Team->Player + Team->Size);     // Spieler erstellen (
       (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
+      printf("\nAnzahl der Spieler in der Mannschaft: %i", (Team->Size)); // Test !! Gibt die Aktuelle Größe der Spieler aus
    } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
    TeamCounter++;
 }
@@ -64,19 +70,12 @@ void deleteTeam()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Pointer nehmen wie bei createTeam?
+void createPlayer(TPlayer *Player)
 {
-   /* Ausgabe Titel */
-   char title[] = "Erfassung der Spieler";
-   printf("\n%s\n", title);
-   printLine('-', strlen(title));
-
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-   getDate("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Birthday));
-   getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   getDate("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Birthday));
+   getNumber("Geben Sie bitte die Trikotnr. des Spielers ein (1-99):\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
-   Team->Size++;
-
 }
 
 
@@ -134,9 +133,9 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *Player)
+void listOnePlayer(TPlayer *Player, int Size)
 {
-   printf("%s (%i ; ", Player->Name, Player->Number);
+   printf("\n   %02i. %s (%i", Size, Player->Name, Player->Number);
 //   printDate(Player->Birthday);
 }
 
@@ -150,13 +149,13 @@ void listOneTeam(TTeam *Team)
 {
    int i;
 
-   printf("\n\nName             : %s", Team->Name);
-   printf("Trainer            : %s", Team->Coach);
-   printf("Anzahl der Spieler : %i", Team->Size);
+   printf("\n\nName               : %s", Team->Name);
+   printf("\nTrainer            : %s", Team->Coach);
+   printf("\nAnzahl der Spieler : %i", Team->Size);
 
    for(i = 0; i < (Team->Size); i++)
    {
-      listOnePlayer((Team->Player) + i);
+      listOnePlayer((Team->Player) + i, i+1);
    }
 }
 
@@ -170,17 +169,21 @@ void listTeams(TTeam *Team)
 {
    int i;
 
-   if(!TeamCounter)
-      printf("Sie haben bis jetzt kein Team eingegeben.\n");
+   clearScreen();
+   char title[] = "Liste der Mannschaften";
+   printf("%s\n", title);
+   printLine('=', strlen(title));
+
+   if(TeamCounter == NULL)
+      printf("\n\nAktuell sind keine Mannschaften erstellt worden!\n\n");
+
    else
    {
-      char title[] = "Liste der Mannschaften";
-      printf("\n%s\n", title);
-      printLine('-', strlen(title));
-
       for(i = 0; i < TeamCounter; i++)
       {
          listOneTeam(Teams + i);
       }
    }
+   printf("\n\n");
+   waitForEnter();
 }

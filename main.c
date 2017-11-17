@@ -13,7 +13,7 @@
 int main()
 {
     int input;
-    char *menuTitel = "Mannschaften-Verwaltung V0.2";       // Menutitel deklaration
+    char *menuTitel = "Mannschaften-Verwaltung V0.3";       // Menutitel deklaration
     char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu deklaration
                          "Spieler hinzufuegen",
                          "Spieler loeschen",
@@ -26,7 +26,7 @@ int main()
     {
          switch(input)
          {
-            case 1: createTeam();    break;
+            case 1: createTeam();         break;
             case 2: addPlayer();          break;
             case 3: deletePlayer();       break;
             case 4: deleteTeam();         break;
