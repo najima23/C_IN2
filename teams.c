@@ -136,7 +136,8 @@ void sortTeams()
  *******************************************************************/
 void listOnePlayer(TPlayer *Player)
 {
-   printf("%s (%i ; * %i)\n", Player->Name, Player->Number, Player->Birthday);
+   printf("%s (%i ; ", Player->Name, Player->Number);
+//   printDate(Player->Birthday);
 }
 
 /********************************************************************
@@ -147,12 +148,15 @@ void listOnePlayer(TPlayer *Player)
  *******************************************************************/
 void listOneTeam(TTeam *Team)
 {
-   int i = 0;
+   int i;
 
-   while(i <= Team->Size)
+   printf("\n\nName             : %s", Team->Name);
+   printf("Trainer            : %s", Team->Coach);
+   printf("Anzahl der Spieler : %i", Team->Size);
+
+   for(i = 0; i < (Team->Size); i++)
    {
-      listOnePlayer(Team->Player);
-      i++;
+      listOnePlayer((Team->Player) + i);
    }
 }
 
@@ -164,11 +168,19 @@ void listOneTeam(TTeam *Team)
  *******************************************************************/
 void listTeams(TTeam *Team)
 {
-   int i = 0;
+   int i;
 
-   while(i <= TeamCounter)
+   if(!TeamCounter)
+      printf("Sie haben bis jetzt kein Team eingegeben.\n");
+   else
    {
-      listOneTeam(Teams);
-      i++;
+      char title[] = "Liste der Mannschaften";
+      printf("\n%s\n", title);
+      printLine('-', strlen(title));
+
+      for(i = 0; i < TeamCounter; i++)
+      {
+         listOneTeam(Teams + i);
+      }
    }
 }
