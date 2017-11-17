@@ -22,13 +22,11 @@ int main()
                          "Sortieren",
                          "Auflisten",
                          "Programm beenden"};
-    TTeam Team;
-
     while( (input = getMenu(menuTitel, menuItems, 8)) != 8)  // Menuauswahl
     {
          switch(input)
          {
-            case 1: createTeam(&Team);    break;
+            case 1: createTeam();    break;
             case 2: addPlayer();          break;
             case 3: deletePlayer();       break;
             case 4: deleteTeam();         break;

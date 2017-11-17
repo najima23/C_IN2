@@ -13,7 +13,7 @@
 #include "tools.h"
 #include "datastructure.h"
 
-int TeamCounter;
+int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
 
 /********************************************************************
@@ -22,25 +22,27 @@ TTeam Teams[MAXTEAMS];
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void createTeam(TTeam *Team)
+void createTeam()
 {
+   TTeam *Team = Teams + TeamCounter;
    char *title = "Erfassung einer neuen Mannschaft";
-   char *Player;
    clearScreen();
 
    printf("%s\n", title);
    printLine('=', strlen(title));
    printf("\n\n");
 
-   getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name));
+   getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name)); //
    getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 0, &(Team->Coach));
 
    Team->Size = 0;
-   TeamCounter++;
+
    do
    {
-      createPlayer(&Player);
+      createPlayer(Team->Player + Team->Size);
+      (Team->Size)++;
    } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
+   TeamCounter++;
 }
 
 /********************************************************************
@@ -69,35 +71,11 @@ void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Poi
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-<<<<<<< HEAD
-//<<<<<<< HEAD
    getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
    Team->Size++;
-//=======
-   clearBuffer();
 
-/*   printf("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ");
-   scanf("%i", &Birthday);
-   clearBuffer;
-
-   printf("Geben Sie bitte die Trikotnr. des Spielers ein:\n-> ");
-   scanf("%i", &Number);   // EINE NUMMER IN STRINGFORM?
-   clearBuffer();*/
-
-   printf("\n");
-//   Goals = 0;     // UNNÖTIG, IST SCHON 0
-
-   printf("\n");
-   waitForEnter();      // BRAUCHEN WIR GLAUB ICH NICHT MEHR
-//>>>>>>> 9106cf841e94dbb607607e97de936dc61ae89c55
-=======
-
-   getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
-   getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
-   Player->Goals = 0;
->>>>>>> ac10fad1336bd77373d63596e2de8e2992aabf64
 }
 
 
@@ -172,7 +150,7 @@ void listOneTeam(TTeam *Team, TPlayer *Player)
 
    while(i <= &(Team->Size))
    {
-      listOnePlayer(OneTeam->Player);
+//      listOnePlayer(OneTeam->Player);
       i++;
    }
 
@@ -191,7 +169,7 @@ void listTeams()
 
    while(i <= TeamCounter)
    {
-      listOneTeam();
+//      listOneTeam();
       i++;
    }
 }
