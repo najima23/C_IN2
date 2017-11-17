@@ -1,6 +1,35 @@
 # IN2
 Übung Informatik 2 - Kempfer
 
+Übung 03:
+
+In dieser Übungsaufgabe des Projektes “Mannschafts-Verwaltung“ sollen zum Einen die Eingabe von neuen Mannschaften und neuen Spielern so- wie zum Anderen die Ausgabe auf dem Bildschirm erstellt werden.
+
+Für die Eingabe einer neuen Mannschaft (Funktion createTeam im Mo- dul teams.c) soll der Benutzer die Namen von Mannschaft und Trainer eingeben; die Anzahl der Spieler wird erst einmal auf 0 gesetzt. In einer Schleife werden dann die Spieler erfasst (Funktion createPlayer im Modul teams.c; diese Funktion wird nur zur Eingabe eines Spielers ver- wendet!). Hierbei werden für einen Spieler jeweils Name, Geburtsdatum (Datumseingabe aus der 1. Übungsaufgabe) und die Trikotnr. erfasst; die Anzahl der bereits geschossenen Tore soll auf 0 gesetzt werden. Nach der erfolgreichen Eingabe eines Spielers (also wenn die Funktion crea- tePlayer abgeschlossen ist) muss die Anzahl der Spieler in der Mann- schaft um eins erhöht und der Benutzer gefragt werden, ob noch ein wei- terer Spieler eingegeben werden soll (Funktion askYesOrNo im Modul tools.c). Die Eingabe von Trainernamen und Spielergeburtstag sind optional; alle anderen Eingaben sind Pflichteingaben.
+
+Entsprechend der Beispielausgaben soll die Ausgabe aller Mannschaften (Funktion listTeams im Modul teams.c) erstellt werden. Für eine best- mögliche Wiederverwendbarkeit sollte diese Funktion noch unterteilt wer- den: Die Funktion listTeams ruft in einer Schleife für alle Mannschaften die Funktion listOneTeam auf, in der alle Daten einer Mannschaft auf dem Bildschirm ausgegeben werden. In dieser Funktion wird in einer Schleife über alle Spieler der Mannschaft die Funktion listOnePlayer aufgerufen. Hier werden in einer Zeile die Daten eines Spielers (Name, Trikotnr. und Geburtsdatum; siehe Beispielausgabe) ausgegeben.
+
+ Im Modul datetime.c werden für die Ein- und Ausgabe des Geburtsda- tums folgende Funktionen hinzugefügt:
+- getDate
+- printDate
+
+Die Funktion getDate kann teilweise aus der main.c der 1. Übungsauf- gabe übernommen werden. Beachten Sie aber, dass in der Datenstruktur nur ein Zeiger auf die Datumsstruktur gespeichert wird. D.h. es muss in dieser Funktion auch noch Speicher für die Datumsstruktur reserviert werden.
+
+Die Funktion printDate erhält einen Zeiger auf ein Datum vom Typ TDate und gibt dieses im Format dd.mm.yyyy auf dem Bildschirm aus (Tag und Monat zweistellig und das Jahr vierstellig jeweils mit führenden Nullen).
+
+Da in den Datenstrukturen die Zeichenketten immer als Zeiger auf char und nicht Array von char definiert sind, müssen für alle Zeichenketten jeweils Speicherbereiche entsprechend der Eingabelängen reserviert wer- den. Dazu soll im Modul tools.c eine Funktion getText definiert wer- den, die alle hierfür notwendigen Aufgaben für die Eingabe eines Textes durchführt. Diese Funktion erhält eine Eingabeaufforderung als Zeichen- kette, die maximale Eingabelänge für den einzugebenden Text, einen Wahrheitswert, ob auch ein leerer String als Eingabe zulässig ist sowie einen Zeiger auf eine Zeichenkette (also ein Zeiger auf Zeiger auf char); dieser Zeiger auf Zeichenkette soll jeweils auf die Zeichenketten in der Datenstruktur zeigen. In der Funktion soll ein Text mittels scanf in eine lokale, dynamisch reservierte Zeichenkette eingelesen werden (diese muss am Ende der Funktion wieder freigegeben werden!). Dann soll ent- sprechend der Länge des eingegebenen Textes Speicher reserviert wer- den (über den Parameter Zeiger auf Zeichenkette sollen die Zeichenket- ten in den Datenstrukturen auf diesen jeweils reservierten Speicherbe- reich zeigen!). Dann wird der eingegebene Text in den reservierten Spei- cher kopiert. Die Funktion soll eine 1 zurückgeben, wenn alles geklappt hat, sonst eine 0. Damit soll mit dem Aufruf
+getText("Name: ", 50, 0, &((Teams + TeamCounter)->Name));
+einen Text eingelesen (max. 50 Zeichen; eine leere Eingabe ist nicht zu- lässig) und der Zeiger auf diesen Text in der Datenstruktur gespeichert werden können. Das Ermitteln der Textlänge sowie das Kopieren der Texte können mittels der Funktionen strlen und strcpy aus der string.h erfolgen.
+
+Analog zur Funktion getText soll im Modul tools.c auch noch eine Funktion getNumber für die Eingabe von Zahlen definiert werden. Hier- bei braucht aber kein Speicher reserviert werden. Mit zwei zusätzlichen Parametern Von und Bis kann ein Zahlenbereich angegeben werden, der von der Funktion auch gleich geprüft wird. Diese Funktion könnte z.B. wie folgt aufgerufen werden:
+getNumber("Trikot-Nr.: ", &((Teams + TeamCounter)->TricotNr), 1, 99);
+Die Funktion würde dabei erst dann verlassen werden, wenn der Benut- zer eine gültige Zahl zwischen 1 und 99 eingegeben hat.
+
+Generell soll immer mit Zeigern anstelle von Arrays gearbeitet werden!
+Vergessen Sie nicht, dass bei Programmende alle reservierten Speicher- bereiche wieder freigegeben werden müssen!
+
+####################
+
 Übung 02:
 
 In der zweiten Übungsaufgabe soll das Projekt mit den Quellcode- und Headerdateien sowie die Datenstruktur erstellt werden. Auch sollen eini- ge einfache Funktionen bereits erstellt werden.
