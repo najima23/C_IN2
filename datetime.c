@@ -122,3 +122,47 @@ short getDateFromString(char *input, TDate *date)
    else
       return 0;                                       // Ansonsten die Funktion mit 0 beenden
 }
+
+
+/********************************************************************
+ * Funktion:      getDate
+ * Beschreibung:  - Benutzer soll ein Datum eingeben.
+ *                - Eingabe wird mit Hilfe der Funktion getDateFromString geparst
+ *                und geprueft. Bei gueltigem Datum steht dieses in der Datums-
+ *                variable Date.
+ *                - Ergebnis der Eingabe wird entsprechend angezeigt.
+ *                - wird nur die Eingabetaste gedrueckt, wird die Funktion ohne
+ *                weitere Bildschirmausgabe beendet.
+ * Paramater:     keine
+ * Ergebnis:      -/-
+ *******************************************************************/
+void getDate(char *Prompt, TDate **Datum)
+{
+   TDate Date;
+   char Input[20];
+   int ok = 0;
+
+   do
+   {
+      printf("%s", Prompt);
+      *Input = '\0';
+      scanf("%19[^\n]", Input);
+      clearBuffer();
+      if (*Input)
+         if (getDateFromString(Input, &Date))
+         {
+            *Datum = calloc(1, sizeof(TDate))
+//            if(*Datum)
+            {
+               Player->Birthda
+            }
+            ok = 1;
+         }
+         else
+            printf("Das eingegebene Datum %s ist ungueltig!\n", Input);
+      else
+         break;
+   } while (!ok);
+
+   printf("\n");
+}

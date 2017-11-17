@@ -24,7 +24,8 @@ TTeam Teams[MAXTEAMS];
  *******************************************************************/
 void createTeam()
 {
-   TTeam *Team = Teams + TeamCounter;
+   TTeam *Team = Teams + TeamCounter;     // TTeam = Datentyp // pointer + i // &pointer[i] // Funktion will die Adresse vom Pointer wissen
+   Team->Player;
    char *title = "Erfassung einer neuen Mannschaft";
    clearScreen();
 
@@ -39,8 +40,8 @@ void createTeam()
 
    do
    {
-      createPlayer(Team->Player + Team->Size);
-      (Team->Size)++;
+      createPlayer(Team->Player + Team->Size);     // Spieler erstellen (
+      (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
    } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
    TeamCounter++;
 }
@@ -71,7 +72,7 @@ void createPlayer(TPlayer *Player, TTeam *Team) //Kann man hier den gleichen Poi
    printLine('-', strlen(title));
 
    getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-   getNumber("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Number), 1, 99);
+   getDate("\nGeben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Birthday));
    getNumber("\nGeben Sie bitte die Trikotnr. des Spielers ein:\n-> ", &(Player->Number), 1, 99);
    Player->Goals = 0;
    Team->Size++;
@@ -133,9 +134,9 @@ void sortTeams()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOnePlayer(TPlayer *Player, TTeam *Team)
+void listOnePlayer(TPlayer *Player)
 {
-   printf("%s (%i ; * %i)\n", &(Player->Name), &(Player->Number), &(Player->Birthday));
+   printf("%s (%i ; * %i)\n", Player->Name, Player->Number, Player->Birthday);
 }
 
 /********************************************************************
@@ -144,18 +145,16 @@ void listOnePlayer(TPlayer *Player, TTeam *Team)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listOneTeam(TTeam *Team, TPlayer *Player)
+void listOneTeam(TTeam *Team)
 {
    int i = 0;
 
-   while(i <= &(Team->Size))
+   while(i <= Team->Size)
    {
-//      listOnePlayer(OneTeam->Player);
+      listOnePlayer(Team->Player);
       i++;
    }
-
 }
-
 
 /********************************************************************
  * Funktion:      listTeams
@@ -163,13 +162,13 @@ void listOneTeam(TTeam *Team, TPlayer *Player)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listTeams()
+void listTeams(TTeam *Team)
 {
    int i = 0;
 
    while(i <= TeamCounter)
    {
-//      listOneTeam();
+      listOneTeam(Teams);
       i++;
    }
 }
