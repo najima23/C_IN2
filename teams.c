@@ -1,18 +1,25 @@
 /****************************************************************************************************
 *****************************************************************************************************
-*** MODUL:          teams.c
-*** BESCHREIBUNG:   Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
-*** GLOBALE FKT:
-*** LOKALE FKT:
+*** MODUL:           teams.c
+*** BESCHREIBUNG:    Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
+*** GLOBALE FKT:     createTeam
+***                  deleteTeam
+***                  addPlayer
+***                  deletePlayer
+***                  searchPlayer
+***                  sortTeams
+***                  listTeams
+*** LOKALE FKT:      createPlayer
+***                  listOnePlayer
+***                  listOneTeam
 ****************************************************************************************************
 ***************************************************************************************************/
 
 #include <stdio.h>
 #include <string.h>
-#include "datetime.h"
-#include "teams.h"
-#include "tools.h"
 #include "datastructure.h"
+#include "datetime.h"
+#include "tools.h"
 
 int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
@@ -46,7 +53,7 @@ void createTeam()
 
    do
    {
-      createPlayer(Team->Player + Team->Size);     // Spieler erstellen (
+      createPlayer((Team->Player) + (Team->Size));     // Spieler erstellen (
       (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
       printf("\nAnzahl der Spieler in der Mannschaft: %i", (Team->Size)); // Test !! Gibt die Aktuelle Größe der Spieler aus
    } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
@@ -151,8 +158,12 @@ void listOneTeam(TTeam *Team)
    int i;
 
    printf("\n\nName               : %s", Team->Name);
-   printf("\nTrainer            : %s", Team->Coach);
+   if(Team->Coach)
+   {
+      printf("\nTrainer            : %s", Team->Coach);
+   }
    printf("\nAnzahl der Spieler : %i", Team->Size);
+   printf("\nSpieler:");
 
    for(i = 0; i < (Team->Size); i++)
    {

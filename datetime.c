@@ -1,10 +1,12 @@
 /****************************************************************************************************
 *****************************************************************************************************
-*** MODUL:          datetime.c
-*** BESCHREIBUNG:   Stellt Funktionen für die Eingabe von Datum und Uhrzeit zur Verfügung
-*** GLOBALE FKT:    getDateFromString
-*** LOKALE FKT:     isLeapYear
-***                 isDateValid
+*** MODUL:           datetime.c
+*** BESCHREIBUNG:    Stellt Funktionen für die Eingabe von Datum und Uhrzeit zur Verfügung
+*** GLOBALE FKT:     getDateFromString
+***                  getDate
+***                  printDate
+*** LOKALE FKT:      isLeapYear
+***                  isDateValid
 *****************************************************************************************************
 ****************************************************************************************************/
 
@@ -173,7 +175,10 @@ void getDate(char *Prompt, TDate **Datum)
  * Paramater:     Zeiger auf Datum mit Typ TDate
  * Ergebnis:      -/-
  *******************************************************************/
-void printDate(TDate **Date)
+void printDate(TDate *Date)
 {
-   printf("; * %02i.%02i.%04i)", (*Date)->Day, (*Date)->Month, (*Date)->Year);
+   if (Date == NULL)
+      printf(")");
+   else
+      printf("; * %02i.%02i.%04i)", Date->Day, Date->Month, Date->Year);
 }

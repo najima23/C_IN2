@@ -5,6 +5,6 @@
    short isDateValid(TDate);                    // Überprüft ein übergebenes Datum
    short getDateFromString(char *, TDate *);    // Extrahiert aus einem String ein Datum und speichert es in eine Struktur
    void getDate(char *, TDate **);
-   void printDate(TDate **);
+   void printDate(TDate *);
 
 #endif

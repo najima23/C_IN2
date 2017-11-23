@@ -1,9 +1,9 @@
 /****************************************************************************************************
 *****************************************************************************************************
-*** MODUL:          menu.c
-*** BESCHREIBUNG:   Zeichnet das Hauptmenü und nimmt die Auswahl der Unterfunktionen entgegen.
-*** GLOBALE FKT:    getMenu
-*** LOKALE FKT:
+*** MODUL:           menu.c
+*** BESCHREIBUNG:    Zeichnet das Hauptmenü und nimmt die Auswahl der Unterfunktionen entgegen.
+*** GLOBALE FKT:     getMenu
+*** LOKALE FKT:      -/-
 *****************************************************************************************************
 ****************************************************************************************************/
 
@@ -30,7 +30,7 @@ int getMenu(char *titel, char **menuItem, int numberOfItems)
       printf("\nIhre Wahl: ");                           // Auswahl des Untermenüs
       scanf("%d", &input);
       clearBuffer();
-      
+
    } while (input < 1 || input > numberOfItems);         // Solange keine gültige Eingabe getätigt
 
    return input;
