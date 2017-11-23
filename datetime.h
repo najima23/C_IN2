@@ -1,5 +1,5 @@
-#ifndef DATATIME_H_INCLUDED
-   #define DATATIME_H_INCLUDED
+#ifndef DATETIME_H_INCLUDED
+   #define DATETIME_H_INCLUDED
 
    short isLeapYear(int);                       // Überprüft, ob es sich um ein Schaltjahr handel
    short isDateValid(TDate);                    // Überprüft ein übergebenes Datum

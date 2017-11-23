@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "datetime.h"
 #include "teams.h"
 #include "tools.h"
 #include "datastructure.h"
@@ -136,7 +137,7 @@ void sortTeams()
 void listOnePlayer(TPlayer *Player, int Size)
 {
    printf("\n   %02i. %s (%i", Size, Player->Name, Player->Number);
-//   printDate(Player->Birthday);
+   printDate(Player->Birthday);
 }
 
 /********************************************************************
