@@ -9,7 +9,6 @@
 #include "menu.h"
 #include "datastructure.h"
 
-
 int main()
 {
     int input;

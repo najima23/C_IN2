@@ -25,6 +25,20 @@ int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
 
 /********************************************************************
+ * Funktion:      createPlayer
+ * Beschreibung:  Eingabe eines Spielers
+ * Paramater:     -/-
+ * Ergebnis:      -/-
+ *******************************************************************/
+void createPlayer(TPlayer *Player)
+{
+   getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
+   getDate("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Birthday));
+   getNumber("Geben Sie bitte die Trikotnr. des Spielers ein (1-99):\n-> ", &(Player->Number), 1, 99);
+   Player->Goals = 0;
+}
+
+/********************************************************************
  * Funktion:      createTeam
  * Beschreibung:  Erstellt ein Team
  * Paramater:     -/-
@@ -33,7 +47,6 @@ TTeam Teams[MAXTEAMS];
 void createTeam()
 {
    TTeam *Team = Teams + TeamCounter;     // TTeam = Datentyp // pointer + i // &pointer[i] // Funktion will die Adresse vom Pointer wissen
-   Team->Player;
    char *title = "Erfassung einer neuen Mannschaft";
    clearScreen();
 
@@ -71,21 +84,6 @@ void deleteTeam()
    printf("deleteTeam\n\n");
    waitForEnter();
 }
-
-/********************************************************************
- * Funktion:      createPlayer
- * Beschreibung:  Eingabe eines Spielers
- * Paramater:     -/-
- * Ergebnis:      -/-
- *******************************************************************/
-void createPlayer(TPlayer *Player)
-{
-   getText("\nGeben Sie bitte den Namen des Spielers ein:\n-> ", 50, 0, &(Player->Name));
-   getDate("Geben Sie bitte das Geburtsdatum des Spielers ein:\n-> ", &(Player->Birthday));
-   getNumber("Geben Sie bitte die Trikotnr. des Spielers ein (1-99):\n-> ", &(Player->Number), 1, 99);
-   Player->Goals = 0;
-}
-
 
 /********************************************************************
  * Funktion:      addPlayer
@@ -177,7 +175,7 @@ void listOneTeam(TTeam *Team)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void listTeams(TTeam *Team)
+void listTeams()
 {
    int i;
 
@@ -186,7 +184,7 @@ void listTeams(TTeam *Team)
    printf("%s\n", title);
    printLine('=', strlen(title));
 
-   if(TeamCounter == NULL)
+   if(TeamCounter == 0)
       printf("\n\nAktuell sind keine Mannschaften erstellt worden!\n\n");
 
    else

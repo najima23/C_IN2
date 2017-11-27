@@ -7,6 +7,6 @@
    void deletePlayer();                // Loeschen eines Spielers
    void searchPlayer();                // Suchen eines Spieler
    void sortTeams();                   // Sortiert die Teams
-   void listTeams(TTeam);              // Listet die Teams auf
+   void listTeams();              // Listet die Teams auf
 
 #endif

@@ -179,7 +179,7 @@ short getText(char *Prompt, int MaxLen, int AllowEmpty, char **Text)
  *               - Gueltiger Zahlenbereich BIS
  * Ergebnis:     -/-
 **********************************************************/
-void getNumber(char *Prompt, int **Number, int From, int To)
+void getNumber(char *Prompt, int *Number, int From, int To)
 {
    int zahl;
    do
