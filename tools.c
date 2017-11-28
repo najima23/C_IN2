@@ -42,7 +42,7 @@ void clearScreen()
       #define clrscreen() system("clear")    // Leert die Konsole (Unix)
    #else
       #define clrscreen() system("CLS")      // Leert die Konsole (Windows)
-   #endif  __unix__
+   #endif __unix__
 
    clrscreen();
 }
@@ -167,6 +167,7 @@ short getText(char *Prompt, int MaxLen, int AllowEmpty, char **Text)
       free(Input);
       return 1;
    }
+   return 0;
 }
 
 /**********************************************************
