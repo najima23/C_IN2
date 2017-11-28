@@ -12,8 +12,8 @@
 int main()
 {
     int input;
-    char *menuTitel = "Mannschaften-Verwaltung V0.3";       // Menutitel deklaration
-    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu deklaration
+    char *menuTitel = "Mannschaften-Verwaltung V0.4";       // Menutitel
+    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu
                          "Spieler hinzufuegen",
                          "Spieler loeschen",
                          "Mannschaft loeschen",
