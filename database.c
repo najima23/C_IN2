@@ -17,7 +17,8 @@
 #include "datastructure.h"
 #include "tools.h"
 
-void loadTeam(char *);
+void loadTeam(char *, char *, FILE *);
+void loadPlayer(char *Zeile, char *tmp, FILE *fp);
 
 int load(char *Datei)
 {
@@ -42,11 +43,9 @@ int load(char *Datei)
                Zeile++;
             if(strncmp(Zeile, "<Team>", 6) == 0)
             {
-               do
-               {
-                  printf("%s", Zeile);
-                  fgets(tmp, 100, fp);
-               } while(strncmp(Zeile, "</Team>", 7) != 0);
+               printf("%s", Zeile);
+               fgets(tmp, 100, fp);
+               loadTeam(Zeile, tmp, fp);
             }
          }
       } while(strncmp(Zeile, "</Daten>", 8) != 0);
@@ -61,15 +60,31 @@ void save(TTeam *Player)
 
 }
 
-void loadTeam(char *Zeile)
+void loadTeam(char *Zeile, char *tmp, FILE *fp)
 {
-
+   do
+   {
+      while((*Zeile == ' ') || (*Zeile == 9))
+         Zeile++;
+      if(strncmp(Zeile, "<Player>", 8) == 0)
+      {
+         printf("%s", Zeile);
+         fgets(tmp, 100, fp);
+         loadPlayer(Zeile, tmp, fp);
+      }
+      printf("%s", Zeile);
+      fgets(tmp, 100, fp);
+   } while(strncmp(Zeile, "</Team>", 7) != 0);
+   printf("%s", Zeile);
 }
 
-void loadPlayer()
+void loadPlayer(char *Zeile, char *tmp, FILE *fp)
 {
-
-
+   do
+   {
+      printf("%s", Zeile);
+      fgets(tmp, 100, fp);
+   } while(strncmp(Zeile, "</Player>", 9) != 0);
 }
 
 void saveTeam()
