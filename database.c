@@ -15,18 +15,25 @@
 
 void load()
 {
+   FILE *fp;
+   int temp = 0;
 
+   fp = fopen("teams.xml", "r");
+   if (fp == NULL)
+      printf("Datei konnte nicht gelesen werden!");
+   else
+   {
+      while((temp=fgetc(fp))!=EOF)
+      {
+         printf
+      }
+      fclose(fp);
+   }
 }
 
 void save(TTeam *Player)
 {
- //     FILE *fp;
- //     fp = fopen("/home/franz/Inf2/Github/IN2/test.xml", "a+");
 
- //     while(Player->Name)
- //     {
- //        fputs("%s\n", fp);
- //     }
 }
 
 void loadTeam()
