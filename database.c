@@ -18,9 +18,15 @@ void load()
 
 }
 
-void save()
+void save(TTeam *Player)
 {
+ //     FILE *fp;
+ //     fp = fopen("/home/franz/Inf2/Github/IN2/test.xml", "a+");
 
+ //     while(Player->Name)
+ //     {
+ //        fputs("%s\n", fp);
+ //     }
 }
 
 void loadTeam()

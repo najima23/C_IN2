@@ -20,6 +20,7 @@
 #include "datastructure.h"
 #include "datetime.h"
 #include "tools.h"
+#include "database.h"
 
 int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
