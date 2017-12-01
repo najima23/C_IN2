@@ -8,34 +8,56 @@
 #include "teams.h"
 #include "menu.h"
 #include "datastructure.h"
+#include "database.h"
+int loadFile();
 
 int main()
 {
-    int input;
-    char *menuTitel = "Mannschaften-Verwaltung V0.4";       // Menutitel
-    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu
-                         "Spieler hinzufuegen",
-                         "Spieler loeschen",
-                         "Mannschaft loeschen",
-                         "Suchen",
-                         "Sortieren",
-                         "Auflisten",
-                         "Programm beenden"};
-    while( (input = getMenu(menuTitel, menuItems, 8)) != 8)  // Menuauswahl
-    {
-         switch(input)
-         {
-            case 1: createTeam();         break;
-            case 2: addPlayer();          break;
-            case 3: deletePlayer();       break;
-            case 4: deleteTeam();         break;
-            case 5: searchPlayer();       break;
-            case 6: sortTeams();          break;
-            case 7: listTeams();          break;
-         }
-    }
+   int input;
+   char *menuTitel = "Mannschaften-Verwaltung V0.4";       // Menutitel
+   char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu
+                        "Spieler hinzufuegen",
+                        "Spieler loeschen",
+                        "Mannschaft loeschen",
+                        "Suchen",
+                        "Sortieren",
+                        "Auflisten",
+                        "Datei laden",
+                        "Programm beenden"};
 
-    return 0;
+   while( (input = getMenu(menuTitel, menuItems, 9)) != 9)  // Menuauswahl
+      {
+      switch(input)
+      {
+         case 1: createTeam();      break;
+         case 2: addPlayer();       break;
+         case 3: deletePlayer();    break;
+         case 4: deleteTeam();      break;
+         case 5: searchPlayer();    break;
+         case 6: sortTeams();       break;
+         case 7: listTeams();       break;
+         case 8: loadFile();        break;
+      }
+   }
+   return 0;
 }
 
+/* Untermenu loadFile */
+int loadFile()
+{
+   int input;
+   char *menuTitel = "Datei Laden";
+   char *menuItems[] = {"vorgegebene Datei Laden (teams.xml)",
+                        "eigene Datei Laden",
+                        "zurück zum Hauptmenu"};
+
+   input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
+   switch(input)
+   {
+      case 1: load();    break;
+      case 2: load();    break;
+      case 3: return 0;
+   }
+   return 0;
+}
 
