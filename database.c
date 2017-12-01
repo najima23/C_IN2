@@ -17,13 +17,15 @@
 #include "datastructure.h"
 #include "tools.h"
 
+void loadTeam(char *);
+
 int load(char *Datei)
 {
    FILE *fp;      // fp = filePointer
    char tmp[101];
    char *Zeile;
 
-   fp = fopen(Datei, "r");
+   fp = fopen(Datei, "rt");
    if (fp == NULL)
    {
       printf("Datei konnte nicht gelesen werden!");
@@ -31,20 +33,23 @@ int load(char *Datei)
    }
    else
    {
-      while((fgets(tmp, 100, fp)) != NULL)
+      do
       {
-         Zeile = tmp;
-         while((*Zeile == ' ') || (*Zeile == 9))
-            Zeile++;
-         if(strncmp(Zeile, "<Deten>", 7) == 0)
+         while((fgets(tmp, 100, fp)) != NULL)
          {
-            printf("Test");
-            waitForEnter();
-            fclose(fp);
-            return 1;
+            Zeile = tmp;
+            while((*Zeile == ' ') || (*Zeile == 9))
+               Zeile++;
+            if(strncmp(Zeile, "<Team>", 6) == 0)
+            {
+               do
+               {
+                  printf("%s", Zeile);
+                  fgets(tmp, 100, fp);
+               } while(strncmp(Zeile, "</Team>", 7) != 0);
+            }
          }
-      }
-      printf("Keine Daten vorhanden!");
+      } while(strncmp(Zeile, "</Daten>", 8) != 0);
       fclose(fp);
    }
    waitForEnter();
@@ -56,13 +61,14 @@ void save(TTeam *Player)
 
 }
 
-void loadTeam()
+void loadTeam(char *Zeile)
 {
 
 }
 
 void loadPlayer()
 {
+
 
 }
 
