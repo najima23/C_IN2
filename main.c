@@ -36,27 +36,8 @@ int main()
          case 5: searchPlayer();    break;
          case 6: sortTeams();       break;
          case 7: listTeams();       break;
-         case 8: loadFile();        break;
+         case 8: loadFileMenu();    break;
       }
-   }
-   return 0;
-}
-
-/* Untermenu loadFile */
-int loadFile()
-{
-   int input;
-   char *menuTitel = "Datei Laden";
-   char *menuItems[] = {"vorgegebene Datei Laden (teams.xml)",
-                        "eigene Datei Laden",
-                        "zurück zum Hauptmenu"};
-
-   input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
-   switch(input)
-   {
-      case 1: load();    break;
-      case 2: load();    break;
-      case 3: return 0;
    }
    return 0;
 }

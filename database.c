@@ -11,25 +11,28 @@
 *****************************************************************************************************
 ****************************************************************************************************/
 
+#include <stdio.h>
 #include "database.h"
 #include "datastructure.h"
+#include "tools.h"
 
-void load()
+void load(char *Datei)
 {
    FILE *fp;
    int temp = 0;
 
-   fp = fopen("teams.xml", "r");
+   fp = fopen(Datei, "r");
    if (fp == NULL)
       printf("Datei konnte nicht gelesen werden!");
    else
    {
       while((temp=fgetc(fp))!=EOF)
       {
-         printf
+         printf("%c", temp);
       }
       fclose(fp);
    }
+   waitForEnter();
 }
 
 void save(TTeam *Player)

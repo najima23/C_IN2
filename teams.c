@@ -1,17 +1,18 @@
 /****************************************************************************************************
 *****************************************************************************************************
-*** MODUL:           teams.c
-*** BESCHREIBUNG:    Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
-*** GLOBALE FKT:     createTeam
-***                  deleteTeam
-***                  addPlayer
-***                  deletePlayer
-***                  searchPlayer
-***                  sortTeams
-***                  listTeams
-*** LOKALE FKT:      createPlayer
-***                  listOnePlayer
-***                  listOneTeam
+*** MODUL:          teams.c
+*** BESCHREIBUNG    Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
+*** GLOBALE FKT:    createTeam
+***                 deleteTeam
+***                 addPlayer
+***                 deletePlayer
+***                 searchPlayer
+***                 sortTeams
+***                 listTeams
+***                 loadFileMenu
+*** LOKALE FKT:     createPlayer
+***                 listOnePlayer
+***                 listOneTeam
 ****************************************************************************************************
 ***************************************************************************************************/
 
@@ -21,6 +22,7 @@
 #include "datetime.h"
 #include "tools.h"
 #include "database.h"
+#include "menu.h"
 
 int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
@@ -197,4 +199,22 @@ void listTeams()
    }
    printf("\n\n");
    waitForEnter();
+}
+
+int loadFileMenu()
+{
+   int input;
+   char *menuTitel = "Datei Laden";
+   char *menuItems[] = {"vorgegebene Datei Laden (teams.xml)",
+                        "eigene Datei Laden",
+                        "zurück zum Hauptmenu"};
+
+   input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
+   switch(input)
+   {
+      case 1: load("teams.xml");    break;
+      case 2: load("little_teams.xml");    break;
+      case 3: return 0;
+   }
+   return 0;
 }
