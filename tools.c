@@ -192,3 +192,17 @@ void getNumber(char *Prompt, int *Number, int From, int To)
    } while (zahl < From || To < zahl);
    *Number = zahl;
 }
+
+/**********************************************************
+ * Funktion:      clearSpaceOrTab
+ * Beschreibung:  Wenn ein Zeiger auf ein space oder tab im
+ *                string zeigt, geh ein Zeichen weiter.
+ * Parameter:     zu prüfenden Zeiger
+ * Ergebnis:      -/-
+**********************************************************/
+void clearSpaceOrTab(char *Prompt)
+{
+   while((*Prompt == ' ') || (*Prompt == 9))
+      Prompt++;
+   printf("%s", Prompt);
+}

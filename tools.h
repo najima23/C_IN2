@@ -7,6 +7,7 @@
    void waitForEnter();                         // Eingabeaufforderung der Entertaste
    void printLine(char, int);                   // Gibt ein Zeichen mit der gewuenschten Anzahl aus
    short getText(char *, int, int, char **);
-   void getNumber(char *t, int *, int, int);
+   void getNumber(char *, int *, int, int);
+   void clearSpaceOrTab(char *);
 
 #endif
