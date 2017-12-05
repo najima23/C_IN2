@@ -58,3 +58,5 @@ dkms.conf
 *.layout
 *.depend
 bin/Debug/ueb01
+*.cbp
+IN2/bin/Debug/uebXX

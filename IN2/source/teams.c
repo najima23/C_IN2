@@ -16,6 +16,9 @@
 ****************************************************************************************************
 ***************************************************************************************************/
 
+#define PATH1  "IN2/teams.xml"
+#define PATH2  "IN2/little_teams.xml"
+
 #include <stdio.h>
 #include <string.h>
 #include "datastructure.h"
@@ -212,8 +215,8 @@ int loadFileMenu()
    input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
    switch(input)
    {
-      case 1: load("teams.xml");    break;
-      case 2: load("little_teams.xml");    break;
+      case 1: load(PATH1);    break;
+      case 2: load(PATH2);    break;
       case 3: return 0;
    }
    return 0;

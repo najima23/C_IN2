@@ -29,7 +29,9 @@ int load(char *Datei)
    fp = fopen(Datei, "rt");
    if (fp == NULL)
    {
-      printf("Datei konnte nicht gelesen werden!");
+      printf("\nDatei konnte nicht gelesen werden!\n");
+      waitForEnter();
+      clearScreen();
       return 0;
    }
    else
