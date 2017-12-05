@@ -61,6 +61,7 @@ void save(TTeam *Player)
 void loadTeam(char *tmp, FILE *fp)
 {
    char *Zeile;
+   char tmp2[101];
    int len = 0;
    do
    {
@@ -74,21 +75,19 @@ void loadTeam(char *tmp, FILE *fp)
       /* Ausgabe Manschaftsname */
       if(strncmp(Zeile, "<Name>", 6) == 0)
       {
-         do
-         {
-            printf("Manschaftsname: %s", Zeile +6);
-            len = strlen(Zeile +6)-3;
-         } while(strncmp(Zeile + len, "</Name>", 7) != 0);
+         len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
+         strncpy(tmp2, Zeile + 6, len);
+         tmp2[len + 1] = '\0';
+         printf("Manschaftsname: %s\n", tmp2);
       }
 
       /* Ausgabe Trainername */
       if(strncmp(Zeile, "<Trainer>", 9) == 0)
       {
-         do
-         {
-            printf("Trainername: %s", Zeile +9);
-            len = strlen(Zeile +9)-3;
-         } while(strncmp(Zeile + len, "</Trainer>", 10) != 0);
+         len = strlen(Zeile + 9) - 12;           // -12 = -10 für </Trainer> + -2 fuer /r
+         strncpy(tmp2, Zeile + 9, len);
+         tmp2[len + 1] = '\0';
+         printf("Trainername: %s\n", tmp2);
       }
    } while(strncmp(Zeile, "</Team>", 7) !=  0);
 }
@@ -96,54 +95,53 @@ void loadTeam(char *tmp, FILE *fp)
 void loadPlayer(char *tmp, FILE *fp)
 {
    char *Zeile;
+   char tmp2[101];
    int len = 0;
    do
    {
+
+      Zeile = tmp +1;
       Zeile = tmp;
       fgets(tmp, 100, fp);
       while((*Zeile == ' ') || (*Zeile == 9))
          Zeile++;
       if(strncmp(Zeile, "</Player>", 9) != 0)
-//         printf("%s", Zeile);
-
-      /* Ausgabe Spielername */
-      if(strncmp(Zeile, "<Name>", 6) == 0)
       {
-         do
+         /* Ausgabe Spielername */
+         if(strncmp(Zeile, "<Name>", 6) == 0)
          {
-            printf("Spielername: %s", Zeile + 6);
-            len = strlen(Zeile +6)-3;
-         } while(strncmp(Zeile + len, "</Name>", 7) != 0);
-      }
+            len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
+            strncpy(tmp2, Zeile + 6, len);
+            tmp2[len + 1] = '\0';
+            printf("Spielername: %s\n", tmp2);
+         }
 
-      /* Ausgabe Geburtstag */
-      if(strncmp(Zeile, "<Birthday>", 10) == 0)
-      {
-         do
+         /* Ausgabe Geburtstag */
+         if(strncmp(Zeile, "<Birthday>", 10) == 0)
          {
-            printf("Geburtstag: %s", Zeile + 10);
-            len = strlen(Zeile + 10)-3;
-         } while(strncmp(Zeile + len, "</Birthday>", 11) != 0);
-      }
+            len = strlen(Zeile + 10) - 13;           // -13 = -11 für </Birthday> + -2 fuer /r
+            strncpy(tmp2, Zeile + 10, len);
+            tmp2[len + 1] = '\0';
+            printf("Geburtstag: %s\n", tmp2);
+         }
 
-      /* Ausgabe Trikotnummer */
-      if(strncmp(Zeile, "<TricotNr>", 10) == 0)
-      {
-         do
+         /* Ausgabe Trikotnummer */
+         if(strncmp(Zeile, "<TricotNr>", 10) == 0)
          {
-            printf("TrikoNr.: %s", Zeile + 10);
-            len = strlen(Zeile + 10)-3;
-         } while(strncmp(Zeile + len, "</TricotNr>", 11) != 0);
-      }
+            len = strlen(Zeile + 10) - 13;           // -13 = -11 für </TricoNr> + -2 fuer /r
+            strncpy(tmp2, Zeile + 10, len);
+            tmp2[len + 1] = '\0';
+            printf("Trainername: %s\n", tmp2);
+         }
 
-      /* Ausgabe Tore */
-      if(strncmp(Zeile, "<Goals>", 7) == 0)
-      {
-         do
+         /* Ausgabe Tore */
+         if(strncmp(Zeile, "<Goals>", 7) == 0)
          {
-            printf("Tore: %s", Zeile + 7);
-            len = strlen(Zeile + 7)-3;
-         } while(strncmp(Zeile + len, "</Goals>", 8) != 0);
+            len = strlen(Zeile + 7) - 10;           // -10 = -8 für </Trainer> + -2 fuer /r
+            strncpy(tmp2, Zeile + 9, len);
+            tmp2[len + 1] = '\0';
+            printf("Trainername: %s\n", tmp2);
+         }
       }
    } while(strncmp(Zeile, "</Player>", 9) != 0);
 }
