@@ -55,9 +55,25 @@ int load(char *Datei)
    return 0;
 }
 
-void save(TTeam *Player)
+void save()
 {
+   FILE *wp;
 
+   while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
+   {
+      wp = fopen("Test.xml", "w+");
+
+      if (wp = NULL)
+      {
+         printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
+         waitForEnter();
+      }
+      else
+      {
+         fprintf(wp, "<Daten>\n");
+         saveTeam(wp);
+      }
+   }
 }
 
 void loadTeam(char *tmp, FILE *fp)
@@ -148,9 +164,18 @@ void loadPlayer(char *tmp, FILE *fp)
    } while(strncmp(Zeile, "</Player>", 9) != 0);
 }
 
-void saveTeam()
+void saveTeam(TTeam *Player, FILE *wp)
 {
+   int i;
 
+   for (i = 0; i < (i + Player->Size); i++);
+   {
+      fprintf(wp,"   <Team>\n");
+      fprintf(wp,"      <Name>%s</Name>\n", Player->Name);
+      fprintf(wp,"      <Trainer>%s</Trainer", Player->Coach);
+   }
+   fclose(wp);
+   waitForEnter();
 }
 
 void savePlayer()

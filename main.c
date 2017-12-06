@@ -25,7 +25,7 @@ int main()
                         "Datei laden",
                         "Programm beenden"};
 
-   while( (input = getMenu(menuTitel, menuItems, 9)) != 9)  // Menuauswahl
+   while( (input = getMenu(menuTitel, menuItems, 9)) ) // Menuauswahl
       {
       switch(input)
       {
@@ -37,6 +37,7 @@ int main()
          case 6: sortTeams();       break;
          case 7: listTeams();       break;
          case 8: loadFileMenu();    break;
+         case 9: save();            break;
       }
    }
    return 0;
