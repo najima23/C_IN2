@@ -1,6 +1,38 @@
 # IN2
 Übung Informatik 2 - Kempfer
 
+Übung 04:
+
+In der vierten Übungsaufgabe des Projektes “Mannschafts-Verwaltung“ sollen die Daten beim Beenden des Programms in einer Datei gespei- chert werden, damit sie beim nächsten Programmstart wieder eingelesen werden können.
+
+Für das Laden und Speichern der Daten sollen einige Funktionen in ei- nem neuen Modul database.c erstellt werden. Erzeugen Sie das Mo- dul (C- und Headerdatei) und passen Sie das Projekt an..
+
+Das Speichern der Daten soll im neuen Modul die Funktion save über- nehmen. Hier soll nach dem erfolgreichen Öffnen der Datei die erste Zei- le mit der Startkennung der Daten (<Data>; siehe Beispiel) geschrieben werden. Dann werden in einer Schleife die Daten der einzelnen Mann- schaften geschrieben; das Schreiben einer Mannschaft kann eine Funkti- on namens saveTeam übernehmen (diese Funktion erhält als Parameter den Datenstrom der offenen Datei). Nach der Startkennung einer Mann- schaft (<Team>) werden die Daten der Mannschaft (Mannschaftsname und Trainername) jeweils mit Start- und Endkennung in eine Zeile ge- schrieben (z.B. <Name>Hertha BSC</Name>). Anschließend werden die Spieler in einer Schleife gespeichert, z.B. mit einer Funktion save- Player. Nachdem alle Spieler geschrieben wurden, wird die Endken- nung der Mannschaft (</Team>) in eine eigene Zeile geschrieben; nach der letzten Mannschaft noch die Endkennung der Daten (</Data>).
+
+Für das Laden der Daten soll eine Funktion load geschrieben werden. In dieser Funktion sollen nach dem erfolgreichen Öffnen der Datei die Daten eingelesen werden. Immer wenn die Startkennung einer Mann- schaft gefunden wird, soll die Funktion loadTeam aufgerufen werden. Diese liest die Daten der einen Mannschaft ein – also bis zur Endkennung </Team>. Wird in dieser Funktion loadTeam die Startkennung ei- ner Spielers gefunden, so soll die Funktion loadPlayer aufgerufen wer- den, die die Daten eines Spielers einliest – also bis zur Endkennung </Player>.
+
+Durch die Start- und Endkennungen können die Felder in beliebiger Rei- henfolge stehen. Ferner kann darüber beim Einlesen geprüft werden, ob die Struktur der Daten gültig ist. Um die Datenbank kontrollieren zu kön- nen, sollte auf eine Verschlüsselung der Daten verzichtet werden. Über- legen Sie sich, welche Maßnahmen noch nötig sind, um angemessen auf eine fehlerhafte Datenbank zu reagieren. Was muss getan werden, wenn in einem Datensatz ein Feld fehlt (z.B. fehlen in der Beispieldatenbank mehrere Felder), damit dieser Datensatz trotzdem noch korrekt eingele- sen und angezeigt werden kann.
+
+Wem diese ganze Beschreibung zu kompliziert ist, guckt sich am besten erst das unten stehende Beispiel an; dies sollte vieles erklären.
+
+Noch ein paar Hinweise:
+1. Nach dem Laden und Speichern sollte die Datei natürlich jeweils wie- der geschlossen werden.
+2. Das Laden der Daten erfolgt bei Programmstart; das Speichern (optio- nal mit Benutzerabfrage) bei Programmende. Wer möchte, kann alterna- tiv Laden und Speichern als Menüpunkte einbauen (das Laden sollte dann die Daten zu den bereits eingegebenen Daten hinzufügen!).
+3. Vor dem Einlesen eines jeden Datensatzes sollten die Felder mit Nul- len (0 bzw. NULL) gefüllt werden.
+4. Bei Programmende müssen natürlich (sofern nicht bereits in der vori- gen Übungsaufgabe erledigt) alle reservierten Speicherbereiche wieder freigegeben werden!
+5. Beim Einlesen kann immer eine ganze Zeile eingelesen werden. Um herauszufinden, welche Daten in der Zeile stehen (dieser Vorgang wird „parsen“ genannt), kann z.B. die Funktion strncmp aus der string.h verwendet werden; z.B. wird mit
+if (strncmp(Zeile, “<Date>“, 6) == 0)
+geprüft, ob die ersten 6 Zeichen in der Zeichenkette Zeile gleich <Date> sind.
+6. Am Anfang einer Zeile können beliebig viele Leerzeichen oder Tabula- toren stehen.
+7. Innerhalb eines Datensatzes können Tags mehrfach vorkommen; ent- sprechend müssen die Speicherbereiche der bereits eingelesenen Daten wieder freigegeben werden.
+8. Ihr Programm muss die mitgelieferte Beispieldatei einlesen können.
+ 
+Generell soll immer mit Zeigern anstelle von Arrays gearbeitet werden!
+
+Kommentieren Sie das Programm. Dazu gehört auch ein Modulheader und zu jeder Funktion ein Funktionsheader (siehe Skript “Grundlagen der Informatik“ Kapitel 5.3 und 5.4)! Achten Sie auch auf Ihre Programm- struktur (Einrückungen, Leerzeichen und -zeilen).
+
+####################
+
 Übung 03:
 
 In dieser Übungsaufgabe des Projektes “Mannschafts-Verwaltung“ sollen zum Einen die Eingabe von neuen Mannschaften und neuen Spielern so- wie zum Anderen die Ausgabe auf dem Bildschirm erstellt werden.
