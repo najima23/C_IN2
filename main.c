@@ -9,7 +9,6 @@
 #include "menu.h"
 #include "datastructure.h"
 #include "database.h"
-int loadFile();
 
 int main()
 {
