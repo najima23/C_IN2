@@ -10,6 +10,7 @@
 ***                  savePlayer
 *****************************************************************************************************
 ****************************************************************************************************/
+#define PATH  "IN2/Test.xml"
 
 #include <stdio.h>
 #include <string.h>
@@ -19,6 +20,7 @@
 
 void loadTeam(char *, FILE *);
 void loadPlayer(char *tmp, FILE *fp);
+void saveTeam(TTeam *, FILE *);
 
 int load(char *Datei)
 {
@@ -55,15 +57,15 @@ int load(char *Datei)
    return 0;
 }
 
-void save()
+int save()
 {
    FILE *wp;
 
    while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
    {
-      wp = fopen("Test.xml", "w+");
+      wp = fopen(PATH, "w+");
 
-      if (wp = NULL)
+      if (wp == NULL)
       {
          printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
          waitForEnter();
@@ -71,9 +73,10 @@ void save()
       else
       {
          fprintf(wp, "<Daten>\n");
-         saveTeam(wp);
+//         saveTeam(wp);            <-- da fehlt noch eine Parameter
       }
    }
+   return 1;
 }
 
 void loadTeam(char *tmp, FILE *fp)
@@ -166,7 +169,7 @@ void loadPlayer(char *tmp, FILE *fp)
 
 void saveTeam(TTeam *Player, FILE *wp)
 {
-   int i;
+/*   int i;
 
    for (i = 0; i < (i + Player->Size); i++);
    {
@@ -175,7 +178,7 @@ void saveTeam(TTeam *Player, FILE *wp)
       fprintf(wp,"      <Trainer>%s</Trainer", Player->Coach);
    }
    fclose(wp);
-   waitForEnter();
+   waitForEnter(); */  // Funktioniert aktuell nicht
 }
 
 void savePlayer()
