@@ -10,7 +10,7 @@
 ***                  savePlayer
 *****************************************************************************************************
 ****************************************************************************************************/
-#define PATH  "IN2/Test.xml"
+#define PATH  "IN2/Test.xml"     // Pfad zum Speichern
 
 #include <stdio.h>
 #include <string.h>
@@ -19,8 +19,7 @@
 #include "tools.h"
 
 void loadTeam(char *, FILE *);
-void loadPlayer(char *tmp, FILE *fp);
-void saveTeam(TTeam *, FILE *);
+void loadPlayer(char *, FILE *);
 
 int load(char *Datei)
 {
@@ -55,28 +54,6 @@ int load(char *Datei)
    }
    waitForEnter();
    return 0;
-}
-
-int save()
-{
-   FILE *wp;
-
-   while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
-   {
-      wp = fopen(PATH, "w+");
-
-      if (wp == NULL)
-      {
-         printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
-         waitForEnter();
-      }
-      else
-      {
-         fprintf(wp, "<Daten>\n");
-//         saveTeam(wp);            <-- da fehlt noch eine Parameter
-      }
-   }
-   return 1;
 }
 
 void loadTeam(char *tmp, FILE *fp)
@@ -165,6 +142,28 @@ void loadPlayer(char *tmp, FILE *fp)
          }
       }
    } while(strncmp(Zeile, "</Player>", 9) != 0);
+}
+
+int save()
+{
+   FILE *wp;
+
+   while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
+   {
+      wp = fopen(PATH, "w+");
+
+      if (wp == NULL)
+      {
+         printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
+         waitForEnter();
+      }
+      else
+      {
+         fprintf(wp, "<Daten>\n");
+ //        saveTeam(/*Hier fehlt ein Parameter*/, wp);
+      }
+   }
+   return 1;
 }
 
 void saveTeam(TTeam *Player, FILE *wp)
