@@ -19,8 +19,16 @@
 #include "datastructure.h"
 #include "tools.h"
 
+TTeam Teams[MAXTEAMS];
 void loadTeam(char *, FILE *);
+<<<<<<< HEAD
 void loadPlayer(char *, FILE *, TTeam *);
+=======
+void loadPlayer(char *, FILE *);
+static void saveTeam(TTeam *, FILE *);
+static void savePlayer(TPlayer *, FILE *);
+
+>>>>>>> de077474bae5ee00afbaede37f8d74c06d363bb8
 
 int load(char *Datei)
 {
@@ -175,13 +183,14 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
    (Team->Size)++;
 }
 
-int save()
+int save(TTeam *D)
 {
    FILE *wp;
+   int i;
 
-   while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
+   if(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") == 1)
    {
-      wp = fopen(PATH, "w+");
+      wp = fopen(PATH, "w");
 
       if (wp == NULL)
       {
@@ -190,28 +199,41 @@ int save()
       }
       else
       {
-         fprintf(wp, "<Daten>\n");
- //        saveTeam(/*Hier fehlt ein Parameter*/, wp);
+         {
+            fprintf(wp, "<Daten>\n");
+
+            for(i = 0; i < TeamCounter; i++)
+               saveTeam((Teams+i), wp);
+
+            fprintf(wp, "</Daten>");
+         }
+      fclose(wp);
       }
    }
-   return 1;
+   return 0;
 }
 
-void saveTeam(TTeam *Player, FILE *wp)
+static void saveTeam(TTeam *D, FILE *wp)
 {
-/*   int i;
+   int i;
+   fprintf(wp," <Team>\n");
+   fprintf(wp,"  <Name>%s</Name>\n", D->Name);
+   fprintf(wp,"  <Trainer>%s</Trainer>\n", D->Coach);
 
-   for (i = 0; i < (i + Player->Size); i++);
+   for(i = 0; i < D->Size; i++)
    {
-      fprintf(wp,"   <Team>\n");
-      fprintf(wp,"      <Name>%s</Name>\n", Player->Name);
-      fprintf(wp,"      <Trainer>%s</Trainer", Player->Coach);
+      savePlayer(D->Player + i, wp);
    }
-   fclose(wp);
-   waitForEnter(); */  // Funktioniert aktuell nicht
+
+   fprintf(wp," </Team>\n");
 }
 
-void savePlayer()
+static void savePlayer(TPlayer *P, FILE *wp)
 {
-
+   fprintf(wp, "  <Player>\n");
+   fprintf(wp, "   <Name>%s</Name>\n", P->Name);
+   fprintf(wp, "   <Birthday>%02i.%02i.%4i</Birthday>\n", P->Birthday->Day, P->Birthday->Month, P->Birthday->Year);
+   fprintf(wp, "   <TricotNr>%02i</TricotNr>\n", P->Number);
+   fprintf(wp, "   <Goals>%i</Goals>\n", P->Goals);
+   fprintf(wp, "  </Player>\n");
 }
