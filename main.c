@@ -36,7 +36,7 @@ int main()
          case 6: sortTeams();          break;
          case 7: listTeams();          break;
          case 8: loadFileMenu();       break;
-         case 9: checkSave = save();   break;
+         case 9: checkSave = save(Teams);   break;
       }
       if(checkSave == 1)
          return 0;

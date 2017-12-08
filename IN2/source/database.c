@@ -144,13 +144,14 @@ void loadPlayer(char *tmp, FILE *fp)
    } while(strncmp(Zeile, "</Player>", 9) != 0);
 }
 
-int save()
+int save(TTeam *D)
 {
    FILE *wp;
+   int i;
 
-   while(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") != 0)
+   if(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") == 1)
    {
-      wp = fopen(PATH, "w+");
+      wp = fopen(PATH, "w");
 
       if (wp == NULL)
       {
@@ -159,28 +160,36 @@ int save()
       }
       else
       {
-         fprintf(wp, "<Daten>\n");
- //        saveTeam(/*Hier fehlt ein Parameter*/, wp);
+         {
+            fprintf(wp, "<Daten>\n");
+
+            for(i = 0; i < TeamCounter; i++)
+               saveTeam(Teams, wp);
+         }
+      fclose(wp);
       }
    }
-   return 1;
+   return 0;
 }
 
-void saveTeam(TTeam *Player, FILE *wp)
+void saveTeam(TTeam *D, FILE *wp)
 {
-/*   int i;
+   int i;
 
-   for (i = 0; i < (i + Player->Size); i++);
+/*   fprintf(wp," <Team>\n");
+   fprintf(wp,"  <Name>%s</Name>\n", D->Name);
+   fprintf(wp,"  <Trainer>%s</Trainer>\n", D->Coach);
+
+   for(i = 0; i < D->Size; i++)
    {
-      fprintf(wp,"   <Team>\n");
-      fprintf(wp,"      <Name>%s</Name>\n", Player->Name);
-      fprintf(wp,"      <Trainer>%s</Trainer", Player->Coach);
+      savePlayer(Teams, wp);
    }
-   fclose(wp);
-   waitForEnter(); */  // Funktioniert aktuell nicht
+*/
 }
 
-void savePlayer()
+void savePlayer(TPlayer *P, FILE *wp)
 {
-
+  /* fprintf(wp, "  <Player>\n");
+   fprintf(wp, "   <Name>%s</Name>", P->Name);
+   */
 }
