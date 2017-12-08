@@ -24,7 +24,7 @@ int main()
                         "Datei laden",
                         "Programm beenden"};
 
-   while( (input = getMenu(menuTitel, menuItems, 9)) ) // Menuauswahl
+   while( (input = getMenu(menuTitel, menuItems, 9))) // Menuauswahl
    {
       switch(input)
       {

@@ -21,14 +21,9 @@
 
 TTeam Teams[MAXTEAMS];
 void loadTeam(char *, FILE *);
-<<<<<<< HEAD
 void loadPlayer(char *, FILE *, TTeam *);
-=======
-void loadPlayer(char *, FILE *);
 static void saveTeam(TTeam *, FILE *);
 static void savePlayer(TPlayer *, FILE *);
-
->>>>>>> de077474bae5ee00afbaede37f8d74c06d363bb8
 
 int load(char *Datei)
 {
@@ -210,7 +205,7 @@ int save(TTeam *D)
       fclose(wp);
       }
    }
-   return 0;
+   return 1;
 }
 
 static void saveTeam(TTeam *D, FILE *wp)
