@@ -22,8 +22,8 @@
 TTeam Teams[MAXTEAMS];
 void loadTeam(char *, FILE *);
 void loadPlayer(char *, FILE *, TTeam *);
-static void saveTeam(TTeam *, FILE *);
-static void savePlayer(TPlayer *, FILE *);
+void saveTeam(TTeam *, FILE *);
+void savePlayer(TPlayer *, FILE *);
 
 int load(char *Datei)
 {
@@ -178,7 +178,7 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
    (Team->Size)++;
 }
 
-int save(TTeam *D)
+int save()
 {
    FILE *wp;
    int i;
@@ -191,44 +191,50 @@ int save(TTeam *D)
       {
          printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
          waitForEnter();
+         return 0;
       }
       else
       {
+         fprintf(wp, "<Daten>\n");
+
+         for(i = 0; i < TeamCounter; i++)
          {
-            fprintf(wp, "<Daten>\n");
-
-            for(i = 0; i < TeamCounter; i++)
-               saveTeam((Teams+i), wp);
-
-            fprintf(wp, "</Daten>");
+            saveTeam((Teams+i), wp);
          }
+
+         fprintf(wp, "</Daten>");
+
       fclose(wp);
       }
    }
    return 1;
 }
 
-static void saveTeam(TTeam *D, FILE *wp)
+void saveTeam(TTeam *D, FILE *wp)
 {
    int i;
    fprintf(wp," <Team>\n");
    fprintf(wp,"  <Name>%s</Name>\n", D->Name);
-   fprintf(wp,"  <Trainer>%s</Trainer>\n", D->Coach);
+   if(D->Coach)
+      fprintf(wp,"  <Trainer>%s</Trainer>\n", D->Coach);
 
    for(i = 0; i < D->Size; i++)
    {
-      savePlayer(D->Player + i, wp);
+      savePlayer(((D->Player)+i)-MAXPLAYER, wp);
    }
 
    fprintf(wp," </Team>\n");
 }
 
-static void savePlayer(TPlayer *P, FILE *wp)
+void savePlayer(TPlayer *P, FILE *wp)
 {
-   fprintf(wp, "  <Player>\n");
-   fprintf(wp, "   <Name>%s</Name>\n", P->Name);
-   fprintf(wp, "   <Birthday>%02i.%02i.%4i</Birthday>\n", P->Birthday->Day, P->Birthday->Month, P->Birthday->Year);
-   fprintf(wp, "   <TricotNr>%02i</TricotNr>\n", P->Number);
-   fprintf(wp, "   <Goals>%i</Goals>\n", P->Goals);
-   fprintf(wp, "  </Player>\n");
+   fprintf(wp,"  <Player>\n");
+   fprintf(wp,"   <Name>%s</Name>\n", P->Name);
+   if(P->Birthday->Day)
+      fprintf(wp,"   <Birthday>%02i.%02i.%4i</Birthday>\n", P->Birthday->Day, P->Birthday->Month, P->Birthday->Year);
+   fprintf(wp,"   <TricotNr>%02i</TricotNr>\n", P->Number);
+   if(P->Goals)
+      fprintf(wp,"   <Goals>%i</Goals>\n", P->Goals);
+   fprintf(wp,"  </Player>\n");
+
 }
