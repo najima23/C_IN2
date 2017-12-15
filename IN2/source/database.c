@@ -184,22 +184,23 @@ int save(TTeam *D)
 
       if (wp == NULL)
       {
-         printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
+         printf("Datei, um Daten zu speichern, konnte nicht geöffnet werden!\n");
          waitForEnter();
          clearScreen();
          return 0;
       }
       else
       {
+         if(TeamCounter != 0)
+         {
+            fprintf(wp, "<Daten>\n");
+            for(i = 0; i < TeamCounter; i++)
+               saveTeam((Teams+i), wp);
+            fprintf(wp, "</Daten>");
 
-         fprintf(wp, "<Daten>\n");
-
-         for(i = 0; i < TeamCounter; i++)
-            saveTeam((Teams+i), wp);
-
-         fprintf(wp, "</Daten>");
-
-      fclose(wp);
+            fclose(wp);
+         }
+         fclose(wp);
       }
    }
    return 1;
