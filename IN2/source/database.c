@@ -10,7 +10,7 @@
 ***                  savePlayer
 *****************************************************************************************************
 ****************************************************************************************************/
-#define PATH  "IN2/Test.xml"     // Pfad zum Speichern
+#define PATH  "IN2/save_teams.xml"     // Pfad zum Speichern
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,7 +65,6 @@ int load(char *Datei)
 void loadTeam(char *tmp, FILE *fp)
 {
    char *Zeile;
-   char tmp2[101];
    int len = 0;
    TTeam *Team = Teams + TeamCounter;
 
@@ -87,9 +86,6 @@ void loadTeam(char *tmp, FILE *fp)
          if(strncmp(Zeile, "<Name>", 6) == 0)
          {
             len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
-            strncpy(tmp2, Zeile + 6, len);
-            tmp2[len] = '\0';
-            printf("Manschaftsname: %s\n", tmp2);
             Team->Name = calloc(len + 1, sizeof(char));
             if(Team->Name)
                strncpy(Team->Name, Zeile + 6, len);
@@ -99,9 +95,6 @@ void loadTeam(char *tmp, FILE *fp)
          if(strncmp(Zeile, "<Trainer>", 9) == 0)
          {
             len = strlen(Zeile + 9) - 12;           // -12 = -10 für </Trainer> + -2 fuer /r
-            strncpy(tmp2, Zeile + 9, len);
-            tmp2[len] = '\0';
-            printf("Trainername: %s\n", tmp2);
             Team->Coach = calloc(len + 1, sizeof(char));
             if(Team->Coach)
                strncpy(Team->Coach, Zeile + 9, len);
@@ -114,7 +107,6 @@ void loadTeam(char *tmp, FILE *fp)
 void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
 {
    char *Zeile;
-   char tmp2[101];
    int len = 0;
    TPlayer *Player = Team->Player + Team->Size;
 
@@ -132,9 +124,6 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             if(strncmp(Zeile, "<Name>", 6) == 0)
             {
                len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
-               strncpy(tmp2, Zeile + 6, len);
-               tmp2[len] = '\0';
-               printf("Spielername: %s\n", tmp2);
                Player->Name = calloc(len + 1, sizeof(char));
                if(Player->Name)
                   strncpy(Player->Name, Zeile + 6, len);
@@ -144,9 +133,6 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             if(strncmp(Zeile, "<Birthday>", 10) == 0)
             {
                len = strlen(Zeile + 10) - 13;           // -13 = -11 für </Birthday> + -2 fuer /r
-               strncpy(tmp2, Zeile + 10, len);
-               tmp2[len] = '\0';
-               printf("Geburtstag: %s\n", tmp2);
 
                Player->Birthday = calloc(1, sizeof(TDate));
                if(Player->Birthday)
@@ -161,10 +147,6 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             if(strncmp(Zeile, "<TricotNr>", 10) == 0)
             {
                len = strlen(Zeile + 10) - 13;           // -13 = -11 für </TricoNr> + -2 fuer /r
-               strncpy(tmp2, Zeile + 10, len);
-               tmp2[len] = '\0';
-               printf("TricotNr: %s\n", tmp2);
-
                Player->Number = atoi(Zeile + 10);
             }
 
@@ -172,10 +154,6 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             if(strncmp(Zeile, "<Goals>", 7) == 0)
             {
                len = strlen(Zeile + 7) - 10;           // -10 = -8 für </Trainer> + -2 fuer /r
-               strncpy(tmp2, Zeile + 7, len);
-               tmp2[len] = '\0';
-               printf("Tore: %s\n", tmp2);
-
                Player->Goals = atoi(Zeile + 7);
             }
          }
@@ -215,7 +193,7 @@ int save(TTeam *D)
       fclose(wp);
       }
    }
-   return 0;
+   return 1;
 }
 
 void saveTeam(TTeam *D, FILE *wp)
