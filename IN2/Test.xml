@@ -1,2 +1,11 @@
 <Daten>
+ <Team>
+  <Name>team</Name>
+  <Trainer>trainer</Trainer>
+  <Player>
+   <Name>spieler</Name>
+   <TricotNr>02</TricotNr>
+   <Goals>0</Goals>
+  </Player>
+ </Team>
 </Daten>

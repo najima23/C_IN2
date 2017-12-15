@@ -178,7 +178,7 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
    (Team->Size)++;
 }
 
-int save()
+int save(TTeam *D)
 {
    FILE *wp;
    int i;
@@ -191,23 +191,22 @@ int save()
       {
          printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
          waitForEnter();
-         return 0;
+         return 1;
       }
       else
       {
+
          fprintf(wp, "<Daten>\n");
 
          for(i = 0; i < TeamCounter; i++)
-         {
             saveTeam((Teams+i), wp);
-         }
 
          fprintf(wp, "</Daten>");
 
       fclose(wp);
       }
    }
-   return 1;
+   return 0;
 }
 
 void saveTeam(TTeam *D, FILE *wp)
@@ -220,7 +219,7 @@ void saveTeam(TTeam *D, FILE *wp)
 
    for(i = 0; i < D->Size; i++)
    {
-      savePlayer(((D->Player)+i)-MAXPLAYER, wp);
+      savePlayer(D->Player + i, wp);
    }
 
    fprintf(wp," </Team>\n");
@@ -228,13 +227,11 @@ void saveTeam(TTeam *D, FILE *wp)
 
 void savePlayer(TPlayer *P, FILE *wp)
 {
-   fprintf(wp,"  <Player>\n");
-   fprintf(wp,"   <Name>%s</Name>\n", P->Name);
-   if(P->Birthday->Day)
-      fprintf(wp,"   <Birthday>%02i.%02i.%4i</Birthday>\n", P->Birthday->Day, P->Birthday->Month, P->Birthday->Year);
-   fprintf(wp,"   <TricotNr>%02i</TricotNr>\n", P->Number);
-   if(P->Goals)
-      fprintf(wp,"   <Goals>%i</Goals>\n", P->Goals);
-   fprintf(wp,"  </Player>\n");
-
+   fprintf(wp, "  <Player>\n");
+   fprintf(wp, "   <Name>%s</Name>\n", P->Name);
+   if(P->Birthday)
+      fprintf(wp, "   <Birthday>%02i.%02i.%4i</Birthday>\n", P->Birthday->Day, P->Birthday->Month, P->Birthday->Year);
+   fprintf(wp, "   <TricotNr>%02i</TricotNr>\n", P->Number);
+   fprintf(wp, "   <Goals>%i</Goals>\n", P->Goals);
+   fprintf(wp, "  </Player>\n");
 }
