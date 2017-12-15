@@ -56,27 +56,35 @@ void createTeam()
    char *title = "Erfassung einer neuen Mannschaft";
    clearScreen();
 
-   printf("%s\n", title);
-   printLine('=', strlen(title));
-   printf("\n\n");
-
-   getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name)); //
-   getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 1, &(Team->Coach));
-
-   Team->Size = 0;
-
-   /* Erfassung eines Spielers in einer neuen Manschaft */
-   title = "Erfassung der Spieler";
-   printf("\n%s\n", title);
-   printLine('-', strlen(title));
-
-   do
+   if(TeamCounter < MAXTEAMS)
    {
-      createPlayer((Team->Player) + (Team->Size));     // Spieler erstellen (
-      (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
-      printf("\nAnzahl der Spieler in der Mannschaft: %i", (Team->Size)); // Test !! Gibt die Aktuelle Größe der Spieler aus
-   } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
-   TeamCounter++;
+      printf("%s\n", title);
+      printLine('=', strlen(title));
+      printf("\n\n");
+
+      getText("Geben Sie bitte den Namen der Mannschaften ein:\n-> ", 50, 0, &(Team->Name)); //
+      getText("Geben Sie bitte den Namen des Trainers ein:\n-> ", 50, 1, &(Team->Coach));
+
+      Team->Size = 0;
+
+      /* Erfassung eines Spielers in einer neuen Manschaft */
+      title = "Erfassung der Spieler";
+      printf("\n%s\n", title);
+      printLine('-', strlen(title));
+
+      do
+      {
+         createPlayer((Team->Player) + (Team->Size));     // Spieler erstellen (
+         (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
+         printf("\nAnzahl der Spieler in der Mannschaft: %i", (Team->Size)); // Test !! Gibt die Aktuelle Größe der Spieler aus
+      } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
+      TeamCounter++;
+   }
+   else
+   {
+      printf("Die maximale Anzahl an Teams(10) ist erreicht!\n\n");
+      waitForEnter();
+   }
 }
 
 /********************************************************************
@@ -211,13 +219,21 @@ int loadFileMenu()
    char *menuItems[] = {"vorgegebene Datei Laden (teams.xml)",
                         "eigene Datei Laden",
                         "zurück zum Hauptmenu"};
-
-   input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
-   switch(input)
+   if(TeamCounter < MAXTEAMS)
    {
-      case 1: load(PATH1);    break;
-      case 2: load(PATH2);    break;
-      case 3: return 0;
+      input = getMenu(menuTitel, menuItems, 3);  // Menuauswahl
+      switch(input)
+      {
+         case 1: load(PATH1);    break;
+         case 2: load(PATH2);    break;
+         case 3: return 0;
+      }
+   }
+   else
+   {
+      clearScreen();
+      printf("Die maximale Anzahl an Teams(10) ist erreicht!\n\n");
+      waitForEnter();
    }
    return 0;
 }
