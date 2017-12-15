@@ -15,10 +15,10 @@ int main()
    int input, checkSave = 0;
    char *menuTitel = "Mannschaften-Verwaltung V0.4";       // Menutitel
    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu
-                        "Spieler hinzufuegen",
-                        "Spieler loeschen",
-                        "Mannschaft loeschen",
-                        "Suchen",
+                        "Spieler hinzufuegen (no Function)",
+                        "Spieler loeschen (no Function)",
+                        "Mannschaft loeschen (no Function)",
+                        "Suchen (no Function)",
                         "Sortieren",
                         "Auflisten",
                         "Datei laden",

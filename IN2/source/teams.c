@@ -142,10 +142,25 @@ void searchPlayer()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void sortTeams()
+int sortTeams()
 {
-   printf("sortTeams\n\n");
-   waitForEnter();
+   int input;
+   char *menuTitel = "Sortieren";
+   char *menuItems[] = {"Spieler nach Namen sortieren",
+                        "Spieler nach Geburtsdatum sortieren",
+                        "Spieler nach TrikotNr. sortieren",
+                        "Spieler nach Anzahl geschossener Tore sortieren",
+                        "zurueck zum Hauptmenu"};
+   input = getMenu(menuTitel, menuItems, 5);  // Menuauswahl
+   switch(input)
+   {
+      case 1:     break;
+      case 2:    break;
+      case 3:    break;
+      case 4: break;
+      case 5: return 0;
+   }
+   return 0;
 }
 
 /********************************************************************
@@ -221,7 +236,7 @@ int loadFileMenu()
    char *menuItems[] = {"Datei laden (teams.xml)",
                         "Datei laden (little_teams.xml)",
                         "Datei laden (save_teams.xml)",
-                        "zurück zum Hauptmenu"};
+                        "zurueck zum Hauptmenu"};
    if(TeamCounter < MAXTEAMS)
    {
       input = getMenu(menuTitel, menuItems, 4);  // Menuauswahl
@@ -230,7 +245,7 @@ int loadFileMenu()
          case 1: load(PATH1);    break;
          case 2: load(PATH2);    break;
          case 3: load(PATH3);    break;
-         case 0: return 0;
+         case 4: return 0;
       }
    }
    else

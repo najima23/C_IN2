@@ -6,7 +6,7 @@
    void addPlayer();                // Hinzufuegen der Spieler
    void deletePlayer();             // Loeschen eines Spielers
    void searchPlayer();             // Suchen eines Spieler
-   void sortTeams();                // Sortiert die Teams
+   int sortTeams();                // Sortiert die Teams
    void listTeams();                // Listet die Teams auf
    int loadFileMenu();              // oeffnet Untermenu load
 
