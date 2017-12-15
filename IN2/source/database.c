@@ -15,11 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "database.h"
 #include "datastructure.h"
+#include "database.h"
+#include "datetime.h"
 #include "tools.h"
 
-TTeam Teams[MAXTEAMS];
 void loadTeam(char *, FILE *);
 void loadPlayer(char *, FILE *, TTeam *);
 void saveTeam(TTeam *, FILE *);
@@ -85,7 +85,9 @@ void loadTeam(char *tmp, FILE *fp)
          /* Ausgabe Manschaftsname */
          if(strncmp(Zeile, "<Name>", 6) == 0)
          {
-            len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
+            len = strlen(Zeile + 6) - 8;           // -2 differenz wegen \r
+            if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
             Team->Name = calloc(len + 1, sizeof(char));
             if(Team->Name)
                strncpy(Team->Name, Zeile + 6, len);
@@ -94,7 +96,9 @@ void loadTeam(char *tmp, FILE *fp)
          /* Ausgabe Trainername */
          if(strncmp(Zeile, "<Trainer>", 9) == 0)
          {
-            len = strlen(Zeile + 9) - 12;           // -12 = -10 für </Trainer> + -2 fuer /r
+            len = strlen(Zeile + 9) - 11;           // -2 differenz wegen \r
+            if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
             Team->Coach = calloc(len + 1, sizeof(char));
             if(Team->Coach)
                strncpy(Team->Coach, Zeile + 9, len);
@@ -123,7 +127,9 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             /* Ausgabe Spielername */
             if(strncmp(Zeile, "<Name>", 6) == 0)
             {
-               len = strlen(Zeile + 6) - 9;           // -9 = -7 für </Name> + -2 fuer /r
+               len = strlen(Zeile + 6) - 8;           // -2 differenz wegen \r
+               if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
                Player->Name = calloc(len + 1, sizeof(char));
                if(Player->Name)
                   strncpy(Player->Name, Zeile + 6, len);
@@ -132,28 +138,31 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
             /* Ausgabe Geburtstag */
             if(strncmp(Zeile, "<Birthday>", 10) == 0)
             {
-               len = strlen(Zeile + 10) - 13;           // -13 = -11 für </Birthday> + -2 fuer /r
-
+               len = strlen(Zeile + 10) - 12;           // -2 differenz wegen \r
+               if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
                Player->Birthday = calloc(1, sizeof(TDate));
                if(Player->Birthday)
                {
-                  Player->Birthday->Day = atoi(Zeile +10);
-                  Player->Birthday->Month = atoi(Zeile +13);
-                  Player->Birthday->Year = atoi(Zeile + 16);
+                  getDateFromString(Zeile+10, Player->Birthday);
                }
             }
 
             /* Ausgabe Trikotnummer */
             if(strncmp(Zeile, "<TricotNr>", 10) == 0)
             {
-               len = strlen(Zeile + 10) - 13;           // -13 = -11 für </TricoNr> + -2 fuer /r
+               len = strlen(Zeile + 10) - 12;           // -2 differenz wegen \r
+               if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
                Player->Number = atoi(Zeile + 10);
             }
 
             /* Ausgabe Tore */
             if(strncmp(Zeile, "<Goals>", 7) == 0)
             {
-               len = strlen(Zeile + 7) - 10;           // -10 = -8 für </Trainer> + -2 fuer /r
+               len = strlen(Zeile + 7) - 9;           // -2 differenz wegen \r
+               if (*(Zeile + strlen(Zeile) - 2) == '\r')
+                  len--;
                Player->Goals = atoi(Zeile + 7);
             }
          }

@@ -8,6 +8,6 @@
    void printLine(char, int);                   // Gibt ein Zeichen mit der gewuenschten Anzahl aus
    short getText(char *, int, int, char **);
    void getNumber(char *, int *, int, int);
-   void clearSpaceOrTab(char *);
+   char* clearSpaceOrTab(char *);
 
 #endif

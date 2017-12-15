@@ -156,8 +156,9 @@ void sortTeams()
  *******************************************************************/
 void listOnePlayer(TPlayer *Player, int Size)
 {
-   printf("\n   %02i. %s (%i", Size, Player->Name, Player->Number);
+   printf("\n   %02i. %-25s(%02i", Size, Player->Name, Player->Number);
    printDate(Player->Birthday);
+   printf(")");
 }
 
 /********************************************************************

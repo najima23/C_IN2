@@ -179,8 +179,6 @@ void getDate(char *Prompt, TDate **Datum)
  *******************************************************************/
 void printDate(TDate *Date)
 {
-   if (Date == NULL)
-      printf(")");
-   else
-      printf("; * %02i.%02i.%04i)", Date->Day, Date->Month, Date->Year);
+   if (Date != NULL)
+      printf("; * %02i.%02i.%04i", Date->Day, Date->Month, Date->Year);
 }

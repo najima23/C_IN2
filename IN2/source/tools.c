@@ -200,9 +200,9 @@ void getNumber(char *Prompt, int *Number, int From, int To)
  * Parameter:     zu prüfenden Zeiger
  * Ergebnis:      -/-
 **********************************************************/
-void clearSpaceOrTab(char *Prompt)
+char* clearSpaceOrTab(char *Prompt)
 {
    while((*Prompt == ' ') || (*Prompt == 9))
       Prompt++;
-   printf("%s", Prompt);
+   return Prompt;
 }
