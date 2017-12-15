@@ -191,7 +191,8 @@ int save(TTeam *D)
       {
          printf("Datei um Daten zu speichern konnte nicht geöffnet werden!\n");
          waitForEnter();
-         return 1;
+         clearScreen();
+         return 0;
       }
       else
       {
