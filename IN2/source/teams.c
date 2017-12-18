@@ -157,8 +157,8 @@ int sortTeams()
       case 1:     break;
       case 2:    break;
       case 3:    break;
-      case 4: break;
-      case 5: return 0;
+      case 4:  break;
+      case 5:  return 0;
    }
    return 0;
 }
@@ -173,6 +173,10 @@ void listOnePlayer(TPlayer *Player, int Size)
 {
    printf("\n   %02i. %-25s(%02i", Size, Player->Name, Player->Number);
    printDate(Player->Birthday);
+   if(Player->Goals == '1')
+      printf(" ,%2i Tor", Player->Goals);
+   if(Player->Goals != '1')
+      printf(" ,%2i Tore", Player->Goals  );
    printf(")");
 }
 
