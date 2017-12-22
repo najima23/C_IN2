@@ -1,18 +1,18 @@
 /****************************************************************************************************
 *****************************************************************************************************
-*** MODUL:          teams.c
-*** BESCHREIBUNG    Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
-*** GLOBALE FKT:    createTeam
-***                 deleteTeam
-***                 addPlayer
-***                 deletePlayer
-***                 searchPlayer
-***                 sortTeams
-***                 listTeams
-***                 loadFileMenu
-*** LOKALE FKT:     createPlayer
-***                 listOnePlayer
-***                 listOneTeam
+*** MODUL:           teams.c
+*** BESCHREIBUNG     Stellt die Funktionen für die Verwaltung der Teams zur Verfügung
+*** GLOBALE FKT:     createTeam
+***                  deleteTeam
+***                  addPlayer
+***                  deletePlayer
+***                  searchPlayer
+***                  sortTeams
+***                  listTeams
+***                  loadFileMenu
+*** LOKALE FKT:      createPlayer
+***                  listOnePlayer
+***                  listOneTeam
 ****************************************************************************************************
 ***************************************************************************************************/
 
@@ -27,6 +27,7 @@
 #include "tools.h"
 #include "database.h"
 #include "menu.h"
+#include "sort.h"
 
 int TeamCounter = 0;
 TTeam Teams[MAXTEAMS];
@@ -144,7 +145,7 @@ void searchPlayer()
  *******************************************************************/
 int sortTeams()
 {
-   int input;
+   int input, i;
    char *menuTitel = "Sortieren";
    char *menuItems[] = {"Spieler nach Namen sortieren",
                         "Spieler nach Geburtsdatum sortieren",
@@ -154,10 +155,22 @@ int sortTeams()
    input = getMenu(menuTitel, menuItems, 5);  // Menuauswahl
    switch(input)
    {
-      case 1:     break;
-      case 2:    break;
-      case 3:    break;
-      case 4:  break;
+      case 1:
+         for(i = 0; i < Teams->Size; i++)
+            QuickSort(Teams->Player, Teams->Size, cmpName);
+         break;
+      case 2:
+         for(i = 0; i < Teams->Size; i++)
+            QuickSort(Teams->Player, Teams->Size, cmpBirthday);
+         break;
+      case 3:
+         for(i = 0; i < Teams->Size; i++)
+            QuickSort(Teams->Player, Teams->Size, cmpTrikot);
+         break;
+      case 4:
+         for(i = 0; i < Teams->Size; i++)
+            QuickSort(Teams->Player, Teams->Size, cmpGoals);
+         break;
       case 5:  return 0;
    }
    return 0;
@@ -173,9 +186,9 @@ void listOnePlayer(TPlayer *Player, int Size)
 {
    printf("\n   %02i. %-25s(%02i", Size, Player->Name, Player->Number);
    printDate(Player->Birthday);
-   if(Player->Goals == '1')
+   if(Player->Goals == 1)
       printf(" ,%2i Tor", Player->Goals);
-   if(Player->Goals != '1')
+   if(Player->Goals != 1)
       printf(" ,%2i Tore", Player->Goals  );
    printf(")");
 }
@@ -233,6 +246,12 @@ void listTeams()
    waitForEnter();
 }
 
+/********************************************************************
+ * Funktion:      loadFileMenu
+ * Beschreibung:  Gibt das Load Untermenu aus
+ * Paramater:     -/-
+ * Ergebnis:      Auswahl des Untermenus
+ *******************************************************************/
 int loadFileMenu()
 {
    int input;
