@@ -111,6 +111,7 @@ void swap(TPlayer *D1, TPlayer *D2)
  *******************************************************************/
 int cmpName(TPlayer *D1, TPlayer *D2)
 {
+   //toupper!!!!
    return 0;
 }
 
@@ -122,7 +123,22 @@ int cmpName(TPlayer *D1, TPlayer *D2)
  *******************************************************************/
 int cmpBirthday(TPlayer *D1, TPlayer *D2)
 {
-    return 0;
+   if(D1->Birthday && D2->Birthday)
+   {
+      if(D1->Birthday->Year > D2->Birthday->Year)
+         return 1;
+      if(D1->Birthday->Year < D2->Birthday->Year)
+         return -1;
+      if(D1->Birthday->Month > D2->Birthday->Month)
+         return 1;
+      if(D1->Birthday->Month < D2->Birthday->Month)
+         return -1;
+      if(D1->Birthday->Day > D2->Birthday->Day)
+         return 1;
+      if(D1->Birthday->Day < D2->Birthday->Day)
+         return -1;
+   }
+   return 0;
 }
 
 /********************************************************************
@@ -133,7 +149,7 @@ int cmpBirthday(TPlayer *D1, TPlayer *D2)
  *******************************************************************/
 int cmpTrikot(TPlayer *D1, TPlayer *D2)
 {
-    return 0;
+   return D1->Number - D2->Number;
 }
 
 /********************************************************************
@@ -144,5 +160,5 @@ int cmpTrikot(TPlayer *D1, TPlayer *D2)
  *******************************************************************/
 int cmpGoals(TPlayer *D1, TPlayer *D2)
 {
-    return D1->Goals - D2->Goals;
+   return D1->Goals - D2->Goals;
 }
