@@ -156,22 +156,23 @@ int sortTeams()
    switch(input)
    {
       case 1:
-         for(i = 0; i < Teams->Size; i++)
-            QuickSort(Teams->Player, Teams->Size, cmpName);
+         for(i = 0; i < TeamCounter; i++)
+            QuickSort((Teams + i)->Player, (Teams + i)->Size, cmpName);
          break;
       case 2:
-         for(i = 0; i < Teams->Size; i++)
-            QuickSort(Teams->Player, Teams->Size, cmpBirthday);
+         for(i = 0; i < TeamCounter; i++)
+            QuickSort((Teams + i)->Player, (Teams + i)->Size, cmpBirthday);
          break;
       case 3:
-         for(i = 0; i < Teams->Size; i++)
-            QuickSort(Teams->Player, Teams->Size, cmpTrikot);
+         for(i = 0; i < TeamCounter; i++)
+            QuickSort((Teams + i)->Player, (Teams + i)->Size, cmpTrikot);
          break;
       case 4:
-         for(i = 0; i < Teams->Size; i++)
-            QuickSort(Teams->Player, Teams->Size, cmpGoals);
+         for(i = 0; i < TeamCounter; i++)
+            QuickSort((Teams + i)->Player, (Teams + i)->Size, cmpGoals);
          break;
-      case 5:  return 0;
+      case 5:
+         return 0;
    }
    return 0;
 }

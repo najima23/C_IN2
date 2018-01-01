@@ -1,34 +1,43 @@
 /****************************************************************************************************
 *****************************************************************************************************
 *** MODUL:           sort.c
-*** BESCHREIBUNG:
-*** GLOBALE FKT:     qsort
-*** LOKALE FKT:
+*** BESCHREIBUNG:    Sortiert nach den gewuenschten Kriterien
+*** GLOBALE FKT:     quickSort
+***                  cmpName
+***                  cmpBirthday
+***                  cmpTrikot
+***                  cmpGoals
+*** LOKALE FKT:      swap
+***                  partition
+***                  qsort
 *****************************************************************************************************
 ****************************************************************************************************/
 
 #include <stdio.h>
+#include <string.h>
 #include "datastructure.h"
 #include "sort.h"
 
 void swap(TPlayer *, TPlayer *);
+// char toUpper(char);
 
 
 /**********************************************************
- * Funktion: int partition(int *Array, int ui, int oi)
- * Unterteilt das angegebene Array in zwei Teile, wobei
- * im linken Teil alle Werte kleiner und im rechten Teil
- * alle Werte groesser als die mittlere Schranke sind.
- * Der Index der Schranke wird zurueckgegeben.
- * Parameter: Array – das zu sortierende Array
- *            ui    - der untere Index des Teils des
- *                    Arrays, der sortiert werden soll
- *            oi    - der obere Index (entsprechend ui)
- * Rueckgabe: int   - Index der Schranke
+ * Funktion:      partition
+ * Beschreibung:  Unterteilt das angegebene Array in zwei
+ *                Teile, wobei im linken Teil alle Werte
+ *                kleiner und im rechten Teil alle Werte
+ *                groesser als die mittlere Schranke sind.
+ *                Der Index der Schranke wird zurueckgegeben.
+ * Parameter:     Array - das zu sortierende Array
+ *                ui    - der untere Index des Teils des
+ *                         Arrays, der sortiert werden soll
+ *                oi    - der obere Index (entsprechend ui)
+ * Rueckgabe:     int   - Index der Schranke
  **********************************************************/
 int partition(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 {
-   int i = ui, j = oi;       // Laufindizes
+   int i = ui + 1, j = oi;       // Laufindizes
    TPlayer *comp = (Array + ui); // Vergleichselement (Schranke)
 
    while (i <= j)
@@ -52,15 +61,15 @@ int partition(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 }
 
 /**********************************************************
- * void qsort(int *Array, int ui, int oi)
- * Unterteilt das Array in zwei Teile (Funktion
- * partition) und ruft sich selber fuer beide Teile
- * erneut auf.
- * Parameter: Array – das zu sortierende Array
- *            ui    - der untere Index des Teils des
- *                    Arrays, der sortiert werden soll
- *            oi    - der obere Index (entsprechend ui)
- * Rueckgabe: keine
+ * Funktion:      qsort
+ * Beschreibung:  Unterteilt das Array in zwei Teile
+ *                (Funktion partition) und ruft sich selber
+ *                fuer beide Teile erneut auf.
+ * Parameter:     Array - das zu sortierende Array
+ *                ui    - der untere Index des Teils des
+ *                         Arrays, der sortiert werden soll
+ *                oi    - der obere Index (entsprechend ui)
+ * Rueckgabe:     -/-
  **********************************************************/
 void qsort(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 {
@@ -77,22 +86,24 @@ void qsort(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 }
 
 /***********************************************************
- * Quick-Sort
- * Sortiert das angegebene Zahlen-Array in aufsteigender
- * Reihenfolge.
- * Parameter: Array  – Zeiger auf das zu sortierende Array
- *            Anzahl – Anzahl der Elemente im Array
- * Rueckgabe: keine
+ * Funktion:      QuickSort
+ * Beschreibung:  Sortiert das angegebene Zahlen-Array in
+ *                aufsteigender Reihenfolge.
+ * Parameter:     Array  – Zeiger auf das zu sortierende Array
+ *                Anzahl – Anzahl der Elemente im Array
+ * Rueckgabe:     -/-
  ***********************************************************/
 void QuickSort(TPlayer *Array, int Anzahl, int (*cmp)(TPlayer *, TPlayer *))
 {
+   printf("Anzahl: %i\n", Anzahl);
    qsort(Array, 0, Anzahl - 1, cmp);
 }
 
 /********************************************************************
  * Funktion:      swap
  * Beschreibung:  vergleich
- * Paramater:     -/-
+ * Paramater:     - Datensatz 1
+ *                - Datensatz 2
  * Ergebnis:      -/-
  *******************************************************************/
 void swap(TPlayer *D1, TPlayer *D2)
@@ -106,20 +117,21 @@ void swap(TPlayer *D1, TPlayer *D2)
 /********************************************************************
  * Funktion:      cmpName
  * Beschreibung:  vergleich
- * Paramater:     -/-
- * Ergebnis:      -/-
+ * Paramater:     - Datensatz 1
+ *                - Datensatz 2
+ * Ergebnis:      Differenz
  *******************************************************************/
 int cmpName(TPlayer *D1, TPlayer *D2)
 {
-   //toupper!!!!
-   return 0;
+   return strcmp(D1->Name, D2->Name);
 }
 
 /********************************************************************
  * Funktion:      cmpBirthday
  * Beschreibung:  vergleich
- * Paramater:     -/-
- * Ergebnis:      -/-
+ * Paramater:     - Datensatz 1
+ *                - Datensatz 2
+ * Ergebnis:      Differenz
  *******************************************************************/
 int cmpBirthday(TPlayer *D1, TPlayer *D2)
 {
@@ -137,6 +149,7 @@ int cmpBirthday(TPlayer *D1, TPlayer *D2)
          return 1;
       if(D1->Birthday->Day < D2->Birthday->Day)
          return -1;
+      return cmpName(D1, D2);
    }
    return 0;
 }
@@ -144,8 +157,9 @@ int cmpBirthday(TPlayer *D1, TPlayer *D2)
 /********************************************************************
  * Funktion:      cmpTrikot
  * Beschreibung:  vergleich
- * Paramater:     -/-
- * Ergebnis:      -/-
+ * Paramater:     - Datensatz 1
+ *                - Datensatz 2
+ * Ergebnis:      Differenz
  *******************************************************************/
 int cmpTrikot(TPlayer *D1, TPlayer *D2)
 {
@@ -155,10 +169,36 @@ int cmpTrikot(TPlayer *D1, TPlayer *D2)
 /********************************************************************
  * Funktion:      cmpGoals
  * Beschreibung:  vergleich
- * Paramater:     -/-
- * Ergebnis:      -/-
+ * Paramater:     - Datensatz 1
+ *                - Datensatz 2
+ * Ergebnis:      Differenz
  *******************************************************************/
 int cmpGoals(TPlayer *D1, TPlayer *D2)
 {
-   return D1->Goals - D2->Goals;
+   int Diff = D1->Goals - D2->Goals;
+
+   if (Diff)
+      return Diff;
+   return cmpName(D1, D2);
 }
+
+
+/********************************************************************
+ * Funktion:      toUpper
+ * Beschreibung:  kleine Buchstaben zu große Buchstaben
+ * Paramater:     -/-
+ * Ergebnis:      -/-
+ *******************************************************************/
+/*char toUpper(char c)
+{
+   if((c >= 'a') && (c <= 'z'))
+      return c -32;
+   if(c == 228)
+      return c -32;
+   if(c == 235)
+      return c -32;
+   if(c == 252)
+      return c -32;
+   return c;
+}
+*/
