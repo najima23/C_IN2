@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "tools.h"
+#include "menu.h"
 
 /********************************************************************
  * Funktion:      getMenu
@@ -43,4 +44,23 @@ int getMenu(char *titel, char **menuItem, int numberOfItems)
    } while (input < 1 || input > numberOfItems);         // Solange keine gueltige Eingabe getaetigt
 
    return input;
+}
+
+int menuDVSortList()
+{
+   int input;
+   char *menuTitle =       "Ausgabe";
+   char *menuItems[] = {   "Aufwaerts ausgeben",
+                           "Abwaerts ausgeben",
+                           "zurueck zum Hauptmenue"};
+
+   input = getMenu(menuTitle, menuItems, 4);  // Menuauswahl
+   switch(input)
+   {
+      case 1: printf("\n\nAufwaerts ausgeben");    break;
+      case 2: printf("\n\nAbwaerts ausgeben");    break;
+      case 3: printf("\n\nzurück zum Hauptmenue");    break;
+      case 4: return 0;
+   }
+   return 0;
 }

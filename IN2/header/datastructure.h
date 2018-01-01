@@ -25,10 +25,15 @@
       char     *Coach;
       int      Size;
       TPlayer  Player[MAXPLAYER];
+      struct TTeam *Next;
+      struct TTeam *Prev;
    } TTeam;
 
 
-    extern int TeamCounter;         // Definition in teams.c
-    extern TTeam Teams[];
+   extern int TeamCounter;    // Definition in teams.c
+
+   extern TTeam Teams[];    // wird für ueb06 entfernt
+//   extern TTeam *FirstTeam; // wird hinzugefuegt für ueb06
+//   extern TTeam *LastTeam;
 
 #endif
