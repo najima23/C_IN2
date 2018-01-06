@@ -66,13 +66,14 @@ void loadTeam(char *tmp, FILE *fp)
 {
    char *Zeile;
    int len = 0;
-   TTeam *Team = Teams + TeamCounter;
+   TTeam *Team = calloc(1, sizeof(TTeam));
 
-   if(TeamCounter < MAXTEAMS)
+   if(Team)
    {
       Team->Name = NULL;
       Team->Coach = NULL;
       Team->Size = 0;
+
       do
       {
          Zeile = tmp;
@@ -176,7 +177,6 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
 int save(TTeam *D)
 {
    FILE *wp;
-   int i;
 
    if(askYesOrNo("Moechten Sie Ihre Eingaben speichern (j/n) ? ") == 1)
    {
@@ -194,8 +194,14 @@ int save(TTeam *D)
          if(TeamCounter != 0)
          {
             fprintf(wp, "<Daten>\n");
-            for(i = 0; i < TeamCounter; i++)
-               saveTeam((Teams+i), wp);
+
+            TTeam *tmp = FirstTeam;
+            while(tmp)
+            {
+               saveTeam(tmp, wp);
+               tmp = tmp->Next;
+            }
+
             fprintf(wp, "</Daten>");
 
             fclose(wp);

@@ -12,13 +12,14 @@
 
 int main()
 {
+   TTeam *tmp = FirstTeam;
    int input, checkSave = 0;
-   char *menuTitel = "Mannschaften-Verwaltung V0.4";       // Menutitel
+   char *menuTitel = "Mannschaften-Verwaltung V0.6";       // Menutitel
    char *menuItems[] = {"Neue Mannschaften anlegen",       // Untermenu
-                        "Spieler hinzufuegen (no Function)",
-                        "Spieler loeschen (no Function)",
-                        "Mannschaft loeschen (no Function)",
-                        "Suchen (no Function)",
+                        "Spieler hinzufuegen (no function)",
+                        "Spieler loeschen (no function)",
+                        "Mannschaft loeschen (no function)",
+                        "Suchen (no function)",
                         "Sortieren",
                         "Auflisten",
                         "Datei laden",
@@ -36,7 +37,7 @@ int main()
          case 6: sortTeams();          break;
          case 7: listTeams();          break;
          case 8: loadFileMenu();       break;
-         case 9: checkSave = save(Teams);   break;
+         case 9: checkSave = save(tmp);   break;
       }
       if(checkSave == 1)
          return 0;

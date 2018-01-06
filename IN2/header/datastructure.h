@@ -2,7 +2,6 @@
    #define DATASTRUCTURE_H_INCLUDED
 
    #define MAXPLAYER 23
-   #define MAXTEAMS  10
 
    typedef struct       // Struktur, um ein Datum abzuspeichern
    {
@@ -19,21 +18,20 @@
       int   Goals;
    } TPlayer;
 
-   typedef struct       // Struktur, um Teamdaten abzuspeichern
+   typedef struct sTeam      // Struktur, um Teamdaten abzuspeichern
    {
       char     *Name;
       char     *Coach;
       int      Size;
       TPlayer  Player[MAXPLAYER];
-      struct TTeam *Next;
-      struct TTeam *Prev;
+      struct sTeam *Next;
+      struct sTeam *Prev;
    } TTeam;
 
 
    extern int TeamCounter;    // Definition in teams.c
 
-   extern TTeam Teams[];    // wird für ueb06 entfernt
-//   extern TTeam *FirstTeam; // wird hinzugefuegt für ueb06
-//   extern TTeam *LastTeam;
+   extern TTeam *FirstTeam; // wird hinzugefuegt für ueb06
+   extern TTeam *LastTeam;
 
 #endif
