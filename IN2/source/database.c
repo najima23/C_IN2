@@ -39,25 +39,24 @@ int load(char *Datei)
       clearScreen();
       return 0;
    }
-   else
+
+   do
    {
-      do
+      while((fgets(tmp, 100, fp)) != NULL)
       {
-         while((fgets(tmp, 100, fp)) != NULL)
+         Zeile = tmp;
+         while((*Zeile == ' ') || (*Zeile == 9))
+            Zeile++;
+         if(strncmp(Zeile, "<Team>", 6) == 0)
          {
-            Zeile = tmp;
-            while((*Zeile == ' ') || (*Zeile == 9))
-               Zeile++;
-            if(strncmp(Zeile, "<Team>", 6) == 0)
-            {
-               loadTeam(tmp, fp);
-            }
-            if (feof(fp))
-               break;
+            loadTeam(tmp, fp);
          }
-      } while(strncmp(Zeile, "</Daten>", 8) != 0);
-      fclose(fp);
-   }
+         if (feof(fp))
+            break;
+      }
+   } while (strncmp(Zeile, "</Daten>", 8) != 0);
+   
+   fclose(fp);   
    waitForEnter();
    return 0;
 }
