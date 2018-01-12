@@ -1,13 +1,17 @@
 /****************************************************************************************************
 *****************************************************************************************************
 *** MODUL:           list.c
-*** BESCHREIBUNG:    -/-
+*** BESCHREIBUNG:    Verkettete Liste
 *** GLOBALE FKT:     insertInDVList
 ***                  removeFromDVList
+***                  freeOneTeam
+***                  freeOnePlayer
 *** LOKALE FKT:      compare
 *****************************************************************************************************
 ****************************************************************************************************/
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "datastructure.h"
 #include "list.h"
 
@@ -55,7 +59,7 @@ int insertInDVList(TTeam *Neu)
       {
          Neu->Next = akt->Next;          // (1.1)
          Neu->Prev = akt;                // (1.2)
-         akt->Prev->Prev = Neu;          // (1.3)
+         akt->Next->Prev = Neu;          // (1.3)
          akt->Next = Neu;                // (1.4)
          return 1;
       }
@@ -111,7 +115,6 @@ TTeam *removeFromDVList(TTeam *Del)
    }
    return NULL;
 }
-
 /***********************************************************
  * Funktion:      compare
  * Beschreibung:
@@ -120,5 +123,37 @@ TTeam *removeFromDVList(TTeam *Del)
  ***********************************************************/
 int compare(TTeam *D1, TTeam *D2)
 {
-   return(D1->Size - D2->Size);
+   return(strcmp(D1->Name, D2->Name));
+}
+
+/***********************************************************
+ * Funktion:      freeOneTeam
+ * Beschreibung:
+ * Parameter:     -/-
+ * Rueckgabe:     -/-
+ ***********************************************************/
+void freeOneTeam(TTeam *deleteTeam)
+{
+   int i = 0;
+
+   free(deleteTeam->Name);
+   free(deleteTeam->Coach);
+   while(i < deleteTeam->Size)
+   {
+      freeOnePlayer(deleteTeam->Player + i);
+      i++;
+   }
+   free(deleteTeam);
+}
+
+/***********************************************************
+ * Funktion:      freeOnePlayer
+ * Beschreibung:
+ * Parameter:     -/-
+ * Rueckgabe:     -/-
+ ***********************************************************/
+void freeOnePlayer(TPlayer *deletePlayer)
+{
+   free(deletePlayer->Name);
+   free(deletePlayer->Birthday);
 }

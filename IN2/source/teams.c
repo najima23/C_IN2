@@ -24,12 +24,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include "datastructure.h"
+#include "list.h"
 #include "datetime.h"
 #include "tools.h"
 #include "database.h"
 #include "menu.h"
 #include "sort.h"
-#include "list.h"
+
 
 int TeamCounter = 0;
 
@@ -102,8 +103,44 @@ void createTeam()
  *******************************************************************/
 void deleteTeam()
 {
-   printf("deleteTeam\n\n");
-   waitForEnter();
+   TTeam *tmp = FirstTeam;
+   int   index = 1,
+         input = 0,
+         i = 0;
+   char *title = "Lister der Mannschaften";
+
+   do
+   {
+      clearScreen();
+
+      printf("%s\n", title);
+      printLine('=', strlen(title));
+      printf("\n\n");
+
+      index = 1;
+      while(tmp)
+      {
+         printf("%02i. %s\n", index, tmp->Name);
+
+         tmp = tmp->Next;
+         index++;
+      }
+      printf("\nWelche Mannschaft moechten Sie loeschen (0 fuer Abbrechen) ?");
+      scanf("%i", &input);
+      tmp = FirstTeam;
+   } while (input > index);
+
+   if(input == 0)
+      return;
+
+   tmp = FirstTeam;
+   while(i < input-1)
+   {
+      tmp = tmp->Next;
+      i++;
+   }
+   removeFromDVList(tmp);
+   freeOneTeam(tmp);
 }
 
 /********************************************************************
@@ -245,21 +282,41 @@ void listOneTeam(TTeam *Team)
 void listTeams()
 {
    TTeam *tmp = FirstTeam;
-
-   clearScreen();
+   TTeam *tmp2 = LastTeam;
+   int choice;
    char title[] = "Liste der Mannschaften";
-   printf("%s\n", title);
-   printLine('=', strlen(title));
+   clearScreen();
 
    if(TeamCounter == 0)
+   {
+      printf("%s\n", title);     // Print Header für ListTeams
+      printLine('=', strlen(title));
       printf("\n\nAktuell sind keine Mannschaften erstellt worden!\n\n");
-
+   }
    else
    {
-      while(tmp)
+      choice = menuDVSortList();          // Menu zum Sortieren der Teams
+      clearScreen();
+
+      printf("%s\n", title);              // Print Header für ListTeams
+      printLine('=', strlen(title));
+
+      if(choice == 1)                     // Menuauswahl Abwaerts sortieren
       {
-         listOneTeam(tmp);
-         tmp = tmp->Next;
+         while(tmp)
+         {
+            listOneTeam(tmp);             // Liste ein Team auf
+            tmp = tmp->Next;              // geh zum naechsten Team
+         }
+      }
+
+      else if(choice == 2)                     // Menuauswahl Abwaerts sortieren
+      {
+         while(tmp2)
+         {
+            listOneTeam(tmp2);            // Liste das ein Team von hinten auf
+            tmp2 = tmp2->Prev;            // geh ein Team zurueck
+         }
       }
    }
    printf("\n\n");

@@ -29,9 +29,9 @@
    } TTeam;
 
 
-   extern int TeamCounter;    // Definition in teams.c
+   extern int TeamCounter;
 
-   extern TTeam *FirstTeam; // wird hinzugefuegt für ueb06
+   extern TTeam *FirstTeam;
    extern TTeam *LastTeam;
 
 #endif

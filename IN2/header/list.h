@@ -3,5 +3,7 @@
 
    int insertInDVList(TTeam *);
    TTeam *removeFromDVList(TTeam *);
+   void freeOneTeam(TTeam *);
+   void freeOnePlayer(TPlayer *);
 
 #endif
