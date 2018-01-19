@@ -30,9 +30,12 @@
 #include "database.h"
 #include "menu.h"
 #include "sort.h"
+#include "search.h"
 
 
 int TeamCounter = 0;
+
+THashTableElement PlayerIndex[MAXINDEX];
 
 TTeam *FirstTeam = NULL;
 TTeam *LastTeam = NULL;
@@ -61,6 +64,8 @@ void createTeam()
 {
    TTeam *Team = calloc(1, sizeof(TTeam));
    char *title = "Erfassung einer neuen Mannschaft";
+   int index_hash;
+
    clearScreen();
 
    if(Team)
@@ -81,7 +86,12 @@ void createTeam()
 
       do
       {
-         createPlayer((Team->Player) + (Team->Size));     // Spieler erstellen (
+         createPlayer((Team->Player) + (Team->Size));     // Spieler erstellen
+
+         /* for Hash */
+         index_hash = calcDivRest(Team->Player + Team->Size);
+         appendInEVList(PlayerIndex + index_hash, Team, Team->Player + Team->Size);
+
          (Team->Size)++;                              // Größe der Manschaft um 1 erhöhen
          printf("\nAnzahl der Spieler in der Mannschaft: %i", (Team->Size)); // Test !! Gibt die Aktuelle Größe der Spieler aus
       } while (askYesOrNo("\nMoechten sie einen weiteren Spieler eingeben (j/n)? "));
@@ -128,7 +138,7 @@ void deleteTeam()
       printf("\nWelche Mannschaft moechten Sie loeschen (0 fuer Abbrechen) ?");
       scanf("%i", &input);
       tmp = FirstTeam;
-   } while (input > index);
+   } while (input >= index);
 
    if(input == 0)
       return;
@@ -347,4 +357,37 @@ int loadFileMenu()
       case 4: return 0;
    }
    return 0;
+}
+
+/********************************************************************
+ * Funktion:      hashList
+ * Beschreibung:  ...
+ * Paramater:     -/-
+ * Ergebnis:      ...
+ *******************************************************************/
+ void hashList()
+ {
+   TListElement *tmp = PlayerIndex->First;
+   char title[] = "Hash-Tabelle";
+   int i;
+   clearScreen();
+
+
+   /* print Tabellenanfang */
+   printf("%s\n", title);
+   printLine('=', strlen(title));
+   printf("\n\nHashwert | Mannschaft                | Spieler\n"); //10 27 26
+   printLine('-', 9); printf("|"); printLine('-', 27); printf("|"); printLine('-', 26);
+
+   for(i = 0; i<MAXINDEX; i++)
+   {
+      tmp = (PlayerIndex + i)->First;
+      while(tmp)
+      {
+         printf("\n%8d | %-25s | %-24s", i, tmp->Team->Name, tmp->Player->Name);
+         tmp = tmp->Next;
+      }
+   }
+   printf("\n\n");
+   waitForEnter();
 }

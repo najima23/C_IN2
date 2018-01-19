@@ -5,5 +5,6 @@
    TTeam *removeFromDVList(TTeam *);
    void freeOneTeam(TTeam *);
    void freeOnePlayer(TPlayer *);
+   void appendInEVList(THashTableElement *, TTeam *, TPlayer *);
 
 #endif

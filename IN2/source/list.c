@@ -6,6 +6,7 @@
 ***                  removeFromDVList
 ***                  freeOneTeam
 ***                  freeOnePlayer
+***                  appendInEVList
 *** LOKALE FKT:      compare
 *****************************************************************************************************
 ****************************************************************************************************/
@@ -14,6 +15,7 @@
 #include <string.h>
 #include "datastructure.h"
 #include "list.h"
+
 
 int compare(TTeam *, TTeam *);
 
@@ -156,4 +158,29 @@ void freeOnePlayer(TPlayer *deletePlayer)
 {
    free(deletePlayer->Name);
    free(deletePlayer->Birthday);
+}
+
+/***********************************************************
+ * Funktion:      appendInEVList
+ * Beschreibung:  ...
+ * Parameter:     -/-
+ * Rueckgabe:     -/-
+ ***********************************************************/
+void appendInEVList(THashTableElement *H, TTeam *T, TPlayer *P)
+{
+   TListElement *tmp = calloc(1, sizeof(TListElement));
+   if(tmp)
+   {
+      tmp->Player = P;
+      tmp->Team = T;
+      tmp->Next = NULL;
+
+      if(H->First == NULL)
+      {
+         H->First = H->Last = tmp;
+         return;
+      }
+      H->Last = H->Last->Next = tmp;
+      return;
+   }
 }

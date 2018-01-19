@@ -20,6 +20,7 @@
 #include "datetime.h"
 #include "tools.h"
 #include "list.h"
+#include "search.h"
 
 void loadTeam(char *, FILE *);
 void loadPlayer(char *, FILE *, TTeam *);
@@ -95,7 +96,9 @@ void loadTeam(char *tmp, FILE *fp)
          while((*Zeile == ' ') || (*Zeile == 9))
             Zeile++;
          if(strncmp(Zeile, "<Player>", 8) == 0)
+         {
             loadPlayer(tmp, fp, Team);
+         }
 
          /* Ausgabe Manschaftsname */
          if(strncmp(Zeile, "<Name>", 6) == 0)
@@ -136,6 +139,7 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
 {
    char *Zeile;
    int len = 0;
+   int index_hash;
    TPlayer *Player = Team->Player + Team->Size;
 
    if(Team->Size < MAXPLAYER)
@@ -157,6 +161,9 @@ void loadPlayer(char *tmp, FILE *fp, TTeam *Team)
                Player->Name = calloc(len + 1, sizeof(char));
                if(Player->Name)
                   strncpy(Player->Name, Zeile + 6, len);
+                           /* fuer Hash */
+               index_hash = calcDivRest(Team->Player + Team->Size);
+               appendInEVList(PlayerIndex + index_hash, Team, Team->Player + Team->Size);
             }
 
             /* Ausgabe Geburtstag */

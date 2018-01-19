@@ -7,6 +7,7 @@
 ***                  cmpBirthday
 ***                  cmpTrikot
 ***                  cmpGoals
+***                  toUpper
 *** LOKALE FKT:      swap
 ***                  partition
 ***                  qsort
@@ -19,7 +20,6 @@
 #include "sort.h"
 
 void swap(TPlayer *, TPlayer *);
-// char toUpper(char);
 
 
 /**********************************************************
@@ -189,7 +189,7 @@ int cmpGoals(TPlayer *D1, TPlayer *D2)
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-/*char toUpper(char c)
+char toUpper(char c)
 {
    if((c >= 'a') && (c <= 'z'))
       return c -32;
@@ -201,4 +201,3 @@ int cmpGoals(TPlayer *D1, TPlayer *D2)
       return c -32;
    return c;
 }
-*/

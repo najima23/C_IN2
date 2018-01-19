@@ -6,5 +6,6 @@
    int cmpBirthday(TPlayer *, TPlayer *);
    int cmpTrikot(TPlayer *, TPlayer *);
    int cmpGoals(TPlayer *, TPlayer *);
+   char toUpper(char);
 
 #endif
