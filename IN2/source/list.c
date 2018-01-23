@@ -15,6 +15,8 @@
 #include <string.h>
 #include "datastructure.h"
 #include "list.h"
+#include "sort.h"
+#include "teams.h"
 
 
 int compare(TTeam *, TTeam *);
@@ -183,4 +185,103 @@ void appendInEVList(THashTableElement *H, TTeam *T, TPlayer *P)
       H->Last = H->Last->Next = tmp;
       return;
    }
+}
+
+int getRest (char *Name)
+{
+   int i = 0;
+   int Sum = 0;
+   int Erg = 0;
+
+   while (*(Name + i))
+   {
+      Sum += toUpper(*(Name +i));
+      i++;
+   }
+   Erg = Sum % MAXINDEX;
+
+   return Erg;
+}
+
+TTeam *removefromDVList (TTeam *Del)
+{
+   TTeam *akt = FirstTeam;
+   TTeam *tmp = NULL;
+
+   if (!Del)
+      return NULL;
+   if (!FirstTeam)
+      return NULL;
+   if (!compareTeamNames(FirstTeam, Del))
+   {
+      if (!FirstTeam->Next)
+      {
+         tmp = FirstTeam;
+         FirstTeam = LastTeam = NULL;
+         return tmp;
+      }
+      FirstTeam->Next->Prev = NULL;
+      tmp = FirstTeam;
+      FirstTeam = FirstTeam->Next;
+      return tmp;
+   }
+   if (!compareTeamNames(LastTeam, Del))
+   {
+      tmp = LastTeam;
+      LastTeam->Prev->Next = NULL;
+      LastTeam = LastTeam->Prev;
+      return tmp;
+   }
+   while (akt->Next)
+   {
+      if (!compareTeamNames(akt->Next, Del))
+      {
+         tmp = akt->Next;
+         tmp->Next->Prev = akt;
+         akt->Next = tmp->Next;
+         return tmp;
+      }
+      akt = akt->Next;
+   }
+   return NULL;
+}
+
+int removefromEVList(THashTableElement *Index, TPlayer *Del)
+{
+   TListElement *tmp = Index->First;
+   TListElement *akt;
+   if (!tmp)
+      return 0;
+   if (!strcmp(tmp->Player->Name, Del->Name))
+   {
+      if (!tmp->Next)
+      {
+         Index->First = Index->Last = NULL;
+         free(tmp);
+         return 1;
+      }
+      Index->First = tmp->Next;
+      free(tmp);
+      return 1;
+   }
+   if (!tmp->Next)
+      return 0;
+   while (strcmp((tmp->Next->Player->Name), (Del->Name)))
+   {
+      tmp = tmp->Next;
+      if (!tmp->Next)
+         return 0;
+   }
+   if(!strcmp(Index->Last->Player->Name, Del->Name))
+   {
+      Index->Last = tmp;
+      akt = tmp->Next;
+      tmp->Next = NULL;
+      free(akt);
+      return 1;
+   }
+   akt = tmp->Next->Next;
+   free(tmp->Next);
+   tmp->Next = akt;
+   return 1;
 }

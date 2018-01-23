@@ -18,8 +18,10 @@
 #include <string.h>
 #include "datastructure.h"
 #include "sort.h"
+#include "search.h"
+#include "list.h"
 
-void swap(TPlayer *, TPlayer *);
+void swap(TTeam *, TPlayer *, TPlayer *);
 
 
 /**********************************************************
@@ -35,7 +37,7 @@ void swap(TPlayer *, TPlayer *);
  *                oi    - der obere Index (entsprechend ui)
  * Rueckgabe:     int   - Index der Schranke
  **********************************************************/
-int partition(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
+int partition(TTeam *Team, TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 {
    int i = ui + 1, j = oi;       // Laufindizes
    TPlayer *comp = (Array + ui); // Vergleichselement (Schranke)
@@ -50,13 +52,13 @@ int partition(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
          j--;
       if (i < j)
       {
-         swap(Array + i, Array + j);
+         swap(Team, Array + i, Array + j);
          i++;
          j--;
       }
    }
    i--;
-   swap(comp, Array + i);
+   swap(Team, comp, Array + i);
    return i;
 }
 
@@ -71,7 +73,7 @@ int partition(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
  *                oi    - der obere Index (entsprechend ui)
  * Rueckgabe:     -/-
  **********************************************************/
-void qsort(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
+void qsort(TTeam * Team, TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
 {
    int idx;      // Schranke einer Zerlegung
 
@@ -79,9 +81,9 @@ void qsort(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
       return;
    else
    {
-      idx = partition(Array, ui, oi, cmp);
-      qsort(Array, ui, idx - 1, cmp); // linken Teil rekursiv sortieren
-      qsort(Array, idx + 1, oi, cmp); // rechten Teil rekursiv sortieren
+      idx = partition(Team, Array, ui, oi, cmp);
+      qsort(Team, Array, ui, idx - 1, cmp); // linken Teil rekursiv sortieren
+      qsort(Team, Array, idx + 1, oi, cmp); // rechten Teil rekursiv sortieren
    }
 }
 
@@ -93,10 +95,10 @@ void qsort(TPlayer *Array, int ui, int oi, int (*cmp)(TPlayer *, TPlayer *))
  *                Anzahl – Anzahl der Elemente im Array
  * Rueckgabe:     -/-
  ***********************************************************/
-void QuickSort(TPlayer *Array, int Anzahl, int (*cmp)(TPlayer *, TPlayer *))
+void QuickSort(TTeam *Team, TPlayer *Array, int Anzahl, int (*cmp)(TPlayer *, TPlayer *))
 {
    printf("Anzahl: %i\n", Anzahl);
-   qsort(Array, 0, Anzahl - 1, cmp);
+   qsort(Team, Array, 0, Anzahl - 1, cmp);
 }
 
 /********************************************************************
@@ -106,12 +108,22 @@ void QuickSort(TPlayer *Array, int Anzahl, int (*cmp)(TPlayer *, TPlayer *))
  *                - Datensatz 2
  * Ergebnis:      -/-
  *******************************************************************/
-void swap(TPlayer *D1, TPlayer *D2)
+void swap(TTeam *Team, TPlayer *D1, TPlayer *D2)
 {
     TPlayer tmp;
+    int HashIndex1 = calcDivRest(D1);
+    int HashIndex2 = calcDivRest(D2);
+    removefromEVList(PlayerIndex + HashIndex1, D1);
+
+    if(D1 != D2)
+      removefromEVList(PlayerIndex + HashIndex2, D2);
     tmp = *D1;
     *D1 = *D2;
     *D2 = tmp;
+
+    appendInEVList(PlayerIndex + HashIndex1, Team, D2);
+    if (D1 != D2)
+      appendInEVList(PlayerIndex + HashIndex2, Team, D1);
 }
 
 /********************************************************************
@@ -200,4 +212,42 @@ char toUpper(char c)
    if(c == 252)
       return c -32;
    return c;
+}
+
+int compareText (char *a, char *b)
+{
+    int i = 0;
+
+    while (( toUpper(*(a+i)) == toUpper(*(b+i)) ) && (toUpper(*(a+i))!= '\0') && (toUpper(*(b+i))!= '\0'))
+        i++;
+    if ( (*(a+i) == '\0') && (*(b+i) == '\0'))
+        return 0;
+    if (*(a+i) == '\0')
+        return -1;
+    if (*(b+i) == '\0')
+        return 1;
+    if ( toUpper(*(a+i)) > toUpper(*(b+i)) )
+        return 1;
+    if ( toUpper(*(a+i)) < toUpper(*(b+i)) )
+        return -1;
+    return 0;
+}
+
+int compareTeamNames (TTeam *a, TTeam *b)
+{
+    int i = 0;
+
+    while (( toUpper(a->Name[i]) == toUpper(b->Name[i]) ) && (toUpper(a->Name[i])!= '\0') && (toUpper(b->Name[i])!= '\0'))
+        i++;
+    if ( (*(a->Name+i) == '\0') && (*(b->Name+i) == '\0'))
+        return 0;
+    if (*(a->Name+i) == '\0')
+        return -1;
+    if (*(b->Name+i) == '\0')
+        return 1;
+    if ( toUpper(*(a->Name+i)) > toUpper(*(b->Name+i)) )
+        return 1;
+    if ( toUpper(*(a->Name+i)) < toUpper(*(b->Name+i)) )
+        return -1;
+    return 0;
 }

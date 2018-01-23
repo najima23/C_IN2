@@ -20,7 +20,7 @@ int main()
                         "(no function) Spieler hinzufuegen",
                         "(no function) Spieler loeschen",
                         "Mannschaft loeschen",
-                        "(in progess) Suchen",
+                        "Spieler Suchen",
                         "Sortieren",
                         "Auflisten",
                         "Datei laden",

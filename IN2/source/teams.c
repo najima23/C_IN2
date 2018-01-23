@@ -116,7 +116,8 @@ void deleteTeam()
    TTeam *tmp = FirstTeam;
    int   index = 1,
          input = 0,
-         i = 0;
+         i = 0,
+         HashIndex;
    char *title = "Lister der Mannschaften";
 
    do
@@ -148,6 +149,12 @@ void deleteTeam()
    {
       tmp = tmp->Next;
       i++;
+   }
+
+   for(i = 0; i < tmp->Size; i++)
+   {
+      HashIndex = getRest((tmp->Player + i)->Name);
+      removefromEVList(PlayerIndex + HashIndex, (tmp->Player + i));
    }
    removeFromDVList(tmp);
    freeOneTeam(tmp);
@@ -183,10 +190,33 @@ void deletePlayer()
  * Paramater:     -/-
  * Ergebnis:      -/-
  *******************************************************************/
-void searchPlayer()
+TListElement* searchPlayer ()
 {
-   printf("searchPlayer\n\n");
+   char Input[31];
+   int HashIndex, index = 0;
+   TListElement *Ergebnis;
+
+   clearScreen();
+   printf("Geben Sie bitte den Namen des gesuchten Spielers ein:\n-> ");
+   scanf("%30[^\n]", Input);
+   clearBuffer();
+
+   HashIndex = getRest(Input);
+   Ergebnis = linearSearch((PlayerIndex + HashIndex), Input);
+   if (!Ergebnis)
+   {
+      printf("\nEs wurde kein Spieler mit dem gesuchten Namen gefunden!\n\n");
+      waitForEnter();
+      return NULL;
+   }
+   if(Ergebnis)
+   {
+      printf("\nSuchergebnis:\n-------------\n\n");
+      printf("in der Mannschaft %s:\n", Ergebnis->Team->Name);
+      printf("   %02d. %s (%02d; * %02i.%02i.%04i; %d Tore)\n\n", ++index, Ergebnis->Player->Name, Ergebnis->Player->Number, Ergebnis->Player->Birthday->Day, Ergebnis->Player->Birthday->Month, Ergebnis->Player->Birthday->Year, Ergebnis->Player->Goals);
+   }
    waitForEnter();
+   return Ergebnis;
 }
 
 /********************************************************************
@@ -212,27 +242,27 @@ int sortTeams()
       case 1:
          while(tmp)
          {
-            QuickSort(tmp->Player, tmp->Size, cmpName);
+            QuickSort(tmp, tmp->Player, tmp->Size, cmpName);
             tmp = tmp->Next;
          }
          break;
       case 2:
             while(tmp)
             {
-               QuickSort(tmp->Player, tmp->Size, cmpBirthday);
+               QuickSort(tmp, tmp->Player, tmp->Size, cmpBirthday);
                tmp = tmp->Next;
             }
          break;
       case 3:
          while(tmp)
          {
-            QuickSort(tmp->Player, tmp->Size, cmpTrikot);
+            QuickSort(tmp, tmp->Player, tmp->Size, cmpTrikot);
             tmp = tmp->Next;
          }
          break;
       case 4:
          {
-            QuickSort(tmp->Player, tmp->Size, cmpGoals);
+            QuickSort(tmp, tmp->Player, tmp->Size, cmpGoals);
             tmp = tmp->Next;
          }
          break;
@@ -384,7 +414,10 @@ int loadFileMenu()
       tmp = (PlayerIndex + i)->First;
       while(tmp)
       {
-         printf("\n%8d | %-25s | %-24s", i, tmp->Team->Name, tmp->Player->Name);
+         if(tmp == (PlayerIndex + i)->First)
+            printf("\n%8d | %-25s | %-24s", i, tmp->Team->Name, tmp->Player->Name);
+         else
+            printf("\n         | %-25s | %-24s", tmp->Team->Name, tmp->Player->Name);
          tmp = tmp->Next;
       }
    }
